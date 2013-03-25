@@ -10,6 +10,8 @@
 \documentclass[a4paper]{article}
 \usepackage{a4wide}
 \usepackage[normalem]{ulem} 
+\usepackage{graphicx}
+\usepackage{lscape}
 
 
 
@@ -121,25 +123,155 @@ We will also aim to meet the Quality Requirements: \\
 
 \section {Use Cases}
 
+From discussion between our members we were able to establish the following Use Cases: \\
+\indent\indent	1. Placing a Bid Order	\\
+\indent\indent	2. Placing an Ask Order 	\\	
+\indent\indent	3. Amending a Bid Order 	\\
+\indent\indent 	4. Amending an Ask Order \\	
+\indent\indent	5. Deleting a Bid Order	\\
+\indent\indent	6. Deleting an Ask Order 	\\ 
+\\
+{\bf Use Case 1}: Placing a bid Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker indicates they want to place a bid order. \\
+{\bf Preconditions}: \\
+\indent The broker has selected a price and quantity for the specific security. \\
+{\bf Postconditions}: \\
+\indent The order will be placed in the system. \\
+\indent The broker will have a Order ID for the bid. \\
+{\bf Normal Flow}: \\
+\indent Broker decides on a bid price and quantity for a specific security. \\
+\indent System accepts bid with bid price, appends to bid list and Order Book. \\
+\indent System returned generated order id to broker. \\ \\ 
 
+\noindent {\bf Use Case 2}: Placing an Ask Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker indicates they want to place an ask order. \\
+{\bf Preconditions}: \\
+\indent The broker has selected a price and quantity for the specific security. \\
+{\bf Postconditions}: \\
+\indent The order will be placed in the system. \\
+\indent The broker will have a Order ID for the ask order. \\
+{\bf Normal Flow}: \\
+\indent Broker decides on an ask price and quantity for a specific security. \\
+\indent System accepts with ask price, appends to ask list and Order Book. \\
+\indent System returned generated Order ID to broker. \\ \\
 
+\noindent {\bf Use Case 3}: Amending a Bid Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker indicates they want to amend a bid order. \\
+{\bf Preconditions}: \\
+\indent The broker has indicated a change in the original price or quantity for the specific \\
+security.\\
+\indent The bid Order ID will already be in the system. \\
+{\bf Postconditions}: \\
+\indent The broker will have a new Order ID for amended Order. \\
+{\bf Normal Flow}: \\
+\indent Broker decides on a change on price or quantity for original bid order. \\
+\indent System accepts the new price/quantity. \\
+\indent Cancels the old Order ID. \\
+\indent Creates a new Order ID. \\ \\
+
+\noindent {\bf Use Case 4}: Amending an Ask Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker wants to change the price or amount of their existing ask order. \\
+{\bf Preconditions}: \\
+\indent The broker has an existing ask Order.\\
+\indent The broker wants to change the ask price or ask amount. \\
+{\bf Postconditions}: \\
+\indent The previous Order gets deleted. \\
+\indent A new order is created with the new ask price and amount. \\
+{\bf Normal Flow}: \\
+\indent The broker wants to update an existing order so the previous order is deleted \\
+and an new order is created. This prevents cheating as orders are prioritised by time, \\
+and a broker can take advantage of their placement in the queue to match a sell order. \\ \\
+
+\noindent {\bf Use Case 5}: Deleting a Bid Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker indicates they want to remove a bid order. \\
+{\bf Preconditions}: \\
+\indent The broker has an existing bid in the system. The broker knows the Order ID.\\
+{\bf Postconditions}: \\
+\indent The Order will be removed from the system. \\
+{\bf Normal Flow}: \\
+\indent Broker decides to remove their bid order from the system. \\
+\indent System accepts the Order ID to remove. \\
+\indent Bid list and order book are updated. \\ \\
+
+\noindent {\bf Use Case 6}: Deleting an Ask Order \\ 
+{\bf Actors}:\\
+\indent Broker \\
+{\bf Triggers}: \\
+\indent The broker indicates they want to remove an ask order. \\
+{\bf Preconditions}: \\
+\indent The broker has an existing ask in the system. The broker knows the Order ID.\\
+{\bf Postconditions}: \\
+\indent The Order will be removed from the system. \\
+{\bf Normal Flow}: \\
+\indent Broker decides to remove their ask order from the system. \\
+\indent System accepts the Order ID to remove. \\
+\indent Ask list and order book are updated. \\ \\
+
+\begin {landscape}
 \section {Architecture Diagram}
-
-
+\begin{figure}
+  \caption{Architectural Diagram.}
+  \centering
+    \includegraphics[width=1.6\textwidth]{ADiagram}
+\end{figure}
+\end {landscape}
 
 \section {Sequence Diagram} 
 
+\begin{figure}[h]
+  \caption{Use Case 1: addBidOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{addBidOrder}
+\end{figure}
 
+\begin{figure}[h]
+  \caption{Use Case 2: addAskOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{addAskOrder}
+\end{figure}
 
-\section {Implementation Language}
+\newpage
 
-We have chosen to implement our project in Java 
+\begin{figure}
+  \caption{Use Case 3: amendBidOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{amendBidOrder}
+\end{figure}
 
-\section {Project Plan}
+\newpage
 
-This Project Plan developed by our Project Manager Albert, and 
+\begin{figure}[h]
+  \caption{Use Case 4: amendAskOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{amendAskOrder}
+\end{figure}
 
+\begin{figure}
+  \caption{Use Case 5: deleteBidOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{deleteBidOrder}
+\end{figure}
 
+\begin{figure}
+  \caption{Use Case 6: deleteAskOrder}
+  \centering
+    \includegraphics[width=1\textwidth]{deleteAskOrder}
+\end{figure}
 
 
 
