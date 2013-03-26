@@ -12,7 +12,7 @@
 \usepackage[normalem]{ulem} 
 \usepackage{graphicx}
 \usepackage{lscape}
-
+\usepackage{float}
 
 
 \begin{document}
@@ -58,11 +58,11 @@
   \hline
   Version & Date & Authors & Summary of Changes\\\hline\hline
 	v1.0 & 20/03/2013 & Group02 & Added in Introduction           	\\\hline
-	v1.1 & 12/09/2012 & Group02 &  		\\\hline
-	v1.2 & 13/09/2012 & Group02 &   		\\\hline
-	v1.3 & 13/09/2012 & Group02 &   		\\\hline
-	v1.4 & 15/09/2012 & Group02 &  		\\\hline
-	v1.5 & 15/09/2012 & Group02 & 		\\\hline
+	v1.1 & 24/03/2013 & Group02 & Added in Architectural Diagram 		\\\hline
+	v1.2 & 25/03/2013 & Group02 & Added in Use Cases  		\\\hline
+	v1.3 & 25/03/2013 & Group02 & Added in Sequence Diagrams		\\\hline
+	v1.4 & 25/03/2013 & Group02 & Added in Model Architectural Diagram 		\\\hline
+	v1.5 & 26/03/2013 & Group02 & Added in Project Plan		\\\hline
 	v1.6 & 16/09/2012 & Group02 &  		\\\hline
 	v1.7 & 15/09/2012 & Group02 &  		\\\hline
 	v1.8 & 15/09/2012 & Group02 &   		\\\hline
@@ -206,59 +206,86 @@ From discussion between our members we were able to establish the following Use 
 
 \begin {landscape}
 \section {Architecture Diagram}
-\begin{figure}
-  \caption{Architectural Diagram.}
+\begin{figure}[H]
   \centering
     \includegraphics[width=1.6\textwidth]{images/ADiagram}
+     \caption{Architectural Diagram.}
 \end{figure}
 \end {landscape}
 
+\begin{landscape}
+\begin{figure}
+  
+  \centering
+    \includegraphics[width=1.6\textwidth]{images/aSequenceDiagram}
+    \caption{Model Architectural Diagram.}
+\end{figure}
+\end {landscape}
+
+
 \section {Sequence Diagram} 
 
-\begin{figure}[h]
-  \caption{Use Case 1: addBidOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/addBidOrder}
+The following are the Sequence Diagrams created created in parallel to the Use Cases \\
+created by our team. \\
+
+\begin{figure}[H] 
+   \includegraphics[width=1\textwidth]{images/addBidOrder}
+   \caption{Use Case 1: addBidOrder}
 \end{figure}
 
-\begin{figure}[h]
-  \caption{Use Case 2: addAskOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/addAskOrder}
+\begin{figure}[H]
+   \includegraphics[width=1\textwidth]{images/addAskOrder}
+   \caption{Use Case 2: addAskOrder}
 \end{figure}
 
-\newpage
-
-\begin{figure}
-  \caption{Use Case 3: amendBidOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/amendBidOrder}
+\begin{figure}[H]
+   \includegraphics[width=1\textwidth]{images/amendBidOrder}
+    \caption{Use Case 3: amendBidOrder}
 \end{figure}
 
-\newpage
-
-\begin{figure}[h]
-  \caption{Use Case 4: amendAskOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/amendAskOrder}
+\begin{figure}[H]
+   \includegraphics[width=1\textwidth]{images/amendAskOrder}
+   \caption{Use Case 4: amendAskOrder}
 \end{figure}
 
-\begin{figure}
-  \caption{Use Case 5: deleteBidOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/deleteBidOrder}
+\begin{figure}[H]
+   \includegraphics[width=1\textwidth]{images/deleteBidOrder}
+   \caption{Use Case 5: deleteBidOrder}
 \end{figure}
 
-\begin{figure}
-  \caption{Use Case 6: deleteAskOrder}
-  \centering
-    \includegraphics[width=1\textwidth]{images/deleteAskOrder}
+\begin{figure}[H]
+   \includegraphics[width=1\textwidth]{images/deleteAskOrder}
+   \caption{Use Case 6: deleteAskOrder}
 \end{figure}
 
+\section {Justification of chosen Language}
 
+\section {Project Plan}
 
+{\bf Communication}: 
 
-\section{LOLZ}
+\indent\indent 1.  We will meet up every Tuesday, Wednesday and Friday for face to face updates and progress checking. \\
+\indent\indent 2. For most other times we will collaborate through our Facebook group page and \\
+on Skype if conference calls are needed. \\
+\indent\indent 3. Google docs and other cloud software like LucidChart will be used for collaboration \\
+ on report writing and diagrams. \\
+
+\noindent {\bf Development Tools}:
+
+\indent\indent 1. Eclipse is our IDE of choice. \\
+\indent\indent 2. Our code will be in Java 6. \\
+\indent\indent 3. Open source libraries like OpenCSV and Swing will be used. \\
+
+\noindent {\bf Version Control}:
+
+We are using Git to keep our projects up to date. \\
+
+\noindent {\bf Roles}: \\
+\indent\indent Sohaib Mushtaq - Developer, Tester \\
+\indent\indent Shanku Roy - Developer, Quality Assurance \\
+\indent\indent Michael Vuong - Developer, LaTeX/Report Generator \\
+\indent\indent Albert Wang -  Developer, Team Lead \\
+
 
 
 
