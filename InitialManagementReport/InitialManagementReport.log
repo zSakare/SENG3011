@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.7)  26 MAR 2013 11:06
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.7)  26 MAR 2013 12:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -216,67 +216,72 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--120
  []
 
 [1]
-Underfull \hbox (badness 10000) in paragraph at lines 126--148
+Underfull \hbox (badness 10000) in paragraph at lines 126--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--148
+Underfull \hbox (badness 10000) in paragraph at lines 126--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--148
+Underfull \hbox (badness 10000) in paragraph at lines 136--148
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--163
+Underfull \hbox (badness 10000) in paragraph at lines 136--148
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--163
+Underfull \hbox (badness 10000) in paragraph at lines 149--160
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--180
+Underfull \hbox (badness 10000) in paragraph at lines 149--160
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--180
+Underfull \hbox (badness 10000) in paragraph at lines 161--173
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--173
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--184
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
+Underfull \hbox (badness 10000) in paragraph at lines 185--195
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
+Underfull \hbox (badness 10000) in paragraph at lines 185--195
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--210
+Underfull \hbox (badness 10000) in paragraph at lines 196--206
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--210
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 211--224
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 211--224
+Underfull \hbox (badness 10000) in paragraph at lines 196--206
 
  []
 
@@ -284,10 +289,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 211--224
 File: images/ADiagram.png Graphic file (type png)
 
 <use images/ADiagram.png>
-Package pdftex.def Info: images/ADiagram.png used on input line 230.
+Package pdftex.def Info: images/ADiagram.png used on input line 212.
 (pdftex.def)             Requested size: 679.34058pt x 285.01132pt.
 
-Overfull \hbox (33.34058pt too wide) in paragraph at lines 230--231
+Overfull \hbox (33.34058pt too wide) in paragraph at lines 212--213
  [][] 
  []
 
@@ -298,14 +303,14 @@ Overfull \hbox (33.34058pt too wide) in paragraph at lines 230--231
 File: images/addBidOrder.jpg Graphic file (type jpg)
 
 <use images/addBidOrder.jpg>
-Package pdftex.def Info: images/addBidOrder.jpg used on input line 239.
+Package pdftex.def Info: images/addBidOrder.jpg used on input line 221.
 (pdftex.def)             Requested size: 424.58624pt x 182.89223pt.
 
 <images/addAskOrder.jpg, id=36, 789.95125pt x 340.27126pt>
 File: images/addAskOrder.jpg Graphic file (type jpg)
 
 <use images/addAskOrder.jpg>
-Package pdftex.def Info: images/addAskOrder.jpg used on input line 245.
+Package pdftex.def Info: images/addAskOrder.jpg used on input line 227.
 (pdftex.def)             Requested size: 424.58624pt x 182.89223pt.
  [5
 
@@ -314,14 +319,14 @@ ng, id=40, 375.65344pt x 272.51813pt>
 File: images/amendBidOrder.png Graphic file (type png)
 
 <use images/amendBidOrder.png>
-Package pdftex.def Info: images/amendBidOrder.png used on input line 253.
+Package pdftex.def Info: images/amendBidOrder.png used on input line 235.
 (pdftex.def)             Requested size: 424.58624pt x 308.03754pt.
 
 <images/amendAskOrder.png, id=41, 375.65344pt x 274.02374pt>
 File: images/amendAskOrder.png Graphic file (type png)
 
 <use images/amendAskOrder.png>
-Package pdftex.def Info: images/amendAskOrder.png used on input line 261.
+Package pdftex.def Info: images/amendAskOrder.png used on input line 243.
 (pdftex.def)             Requested size: 424.58624pt x 309.7394pt.
 
 
@@ -331,14 +336,14 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: images/deleteBidOrder.png Graphic file (type png)
 
 <use images/deleteBidOrder.png>
-Package pdftex.def Info: images/deleteBidOrder.png used on input line 267.
+Package pdftex.def Info: images/deleteBidOrder.png used on input line 249.
 (pdftex.def)             Requested size: 424.58624pt x 303.79712pt.
 
 <images/deleteAskOrder.png, id=43, 358.33875pt x 252.945pt>
 File: images/deleteAskOrder.png Graphic file (type png)
 
 <use images/deleteAskOrder.png>
-Package pdftex.def Info: images/deleteAskOrder.png used on input line 273.
+Package pdftex.def Info: images/deleteAskOrder.png used on input line 255.
 (pdftex.def)             Requested size: 424.58624pt x 299.72688pt.
  [6 <./images/amendBidOrder.png>] [7 <./images/amendAskOrder.png>] [8 <./images
 /deleteBidOrder.png>] [9 <./images/deleteAskOrder.png>] (./InitialManagementRep
@@ -346,16 +351,16 @@ ort.aux) )
 Here is how much of TeX's memory you used:
  1629 strings out of 493488
  23982 string characters out of 3141327
- 77950 words of memory out of 3000000
+ 83950 words of memory out of 3000000
  4920 multiletter control sequences out of 15000+200000
  4659 words of font info for 18 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,6n,23p,254b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,23p,327b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 bx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
 x12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb>
-Output written on InitialManagementReport.pdf (14 pages, 241928 bytes).
+Output written on InitialManagementReport.pdf (14 pages, 243613 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream

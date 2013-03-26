@@ -131,96 +131,78 @@ From discussion between our members we were able to establish the following Use 
 \indent\indent	5. Deleting a Bid Order	\\
 \indent\indent	6. Deleting an Ask Order 	\\ 
 \\
-{\bf Use Case 1}: Placing a bid Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker indicates they want to place a bid order. \\
-{\bf Preconditions}: \\
-\indent The broker has selected a price and quantity for the specific security. \\
-{\bf Postconditions}: \\
-\indent The order will be placed in the system. \\
-\indent The broker will have a Order ID for the bid. \\
-{\bf Normal Flow}: \\
-\indent Broker decides on a bid price and quantity for a specific security. \\
-\indent System accepts bid with bid price, appends to bid list and Order Book. \\
-\indent System returned generated order id to broker. \\ \\ 
+
+
+\noindent{\bf Use Case 1}: Placing a bid Order \\
+    \begin{tabular}{ | l | p{10cm} |}
+    \hline
+    	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker indicates they want to place a bid order. \\\hline
+	{\bf Preconditions} & The broker has selected a price and quantity for the specific security. \\\hline
+	{\bf Postconditions} & The order will be placed in the system. \\
+	& The broker will have a Order ID for the bid. \\\hline
+	{\bf Normal Flow} & Broker decides on a bid price and quantity for a specific security. \\
+	& System accepts bid with bid price, appends to bid list and Order Book. \\
+	& System returned generated order id to broker. \\\hline
+    \end{tabular} \\\\
 
 \noindent {\bf Use Case 2}: Placing an Ask Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker indicates they want to place an ask order. \\
-{\bf Preconditions}: \\
-\indent The broker has selected a price and quantity for the specific security. \\
-{\bf Postconditions}: \\
-\indent The order will be placed in the system. \\
-\indent The broker will have a Order ID for the ask order. \\
-{\bf Normal Flow}: \\
-\indent Broker decides on an ask price and quantity for a specific security. \\
-\indent System accepts with ask price, appends to ask list and Order Book. \\
-\indent System returned generated Order ID to broker. \\ \\
+\begin{tabular}{ | l | p{10cm} |}\hline
+	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker indicates they want to place an ask order.  \\\hline
+	{\bf Preconditions} & The broker has selected a price and quantity for the specific security. \\\hline
+	{\bf Postconditions} & The order will be placed in the system.  \\
+	& The broker will have a Order ID for the ask order. \\\hline
+	{\bf Normal Flow} & Broker decides on an ask price and quantity for a specific security. \\
+	& System accepts with ask price, appends to ask list and Order Book. \\
+	& System returned generated Order ID to broker. \\\hline
+\end{tabular} \\\\
 
 \noindent {\bf Use Case 3}: Amending a Bid Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker indicates they want to amend a bid order. \\
-{\bf Preconditions}: \\
-\indent The broker has indicated a change in the original price or quantity for the specific \\
-security.\\
-\indent The bid Order ID will already be in the system. \\
-{\bf Postconditions}: \\
-\indent The broker will have a new Order ID for amended Order. \\
-{\bf Normal Flow}: \\
-\indent Broker decides on a change on price or quantity for original bid order. \\
-\indent System accepts the new price/quantity. \\
-\indent Cancels the old Order ID. \\
-\indent Creates a new Order ID. \\ \\
+\begin{tabular}{ | l | p{10cm} |}\hline
+	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker indicates they want to amend a bid order. \\\hline
+	{\bf Preconditions} & The broker has indicated a change in the original price or quantity for the specific security. \\
+	& The bid Order ID will already be in the system.  \\\hline
+	{\bf Postconditions} & The broker will have a new Order ID for amended Order. \\\hline
+	{\bf Normal Flow} & Broker decides on a change on price or quantity for original bid order. \\
+	& System accepts the new price/quantity. \\
+	& Cancels the old Order ID. \\
+	& Creates a new Order ID. \\\hline
+\end{tabular} \\\\
 
 \noindent {\bf Use Case 4}: Amending an Ask Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker wants to change the price or amount of their existing ask order. \\
-{\bf Preconditions}: \\
-\indent The broker has an existing ask Order.\\
-\indent The broker wants to change the ask price or ask amount. \\
-{\bf Postconditions}: \\
-\indent The previous Order gets deleted. \\
-\indent A new order is created with the new ask price and amount. \\
-{\bf Normal Flow}: \\
-\indent The broker wants to update an existing order so the previous order is deleted \\
-and an new order is created. This prevents cheating as orders are prioritised by time, \\
-and a broker can take advantage of their placement in the queue to match a sell order. \\ \\
+\begin{tabular}{ | l | p{10cm} |}\hline
+	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker wants to change the price or amount of their existing ask order.  \\\hline
+	{\bf Preconditions} & The broker has an existing ask Order. \\
+	& The broker wants to change the ask price or ask amount. \\\hline
+	{\bf Postconditions} & The previous Order gets deleted. \\
+	& A new order is created with the new ask price and amount. \\\hline
+	{\bf Normal Flow} & The broker wants to update an existing order so the previous order is deleted and an new order is created. This prevents cheating as orders are prioritised by time, and a broker can take advantage of their placement in the queue to match a sell order. \\\hline
+\end{tabular} \\\\
 
 \noindent {\bf Use Case 5}: Deleting a Bid Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker indicates they want to remove a bid order. \\
-{\bf Preconditions}: \\
-\indent The broker has an existing bid in the system. The broker knows the Order ID.\\
-{\bf Postconditions}: \\
-\indent The Order will be removed from the system. \\
-{\bf Normal Flow}: \\
-\indent Broker decides to remove their bid order from the system. \\
-\indent System accepts the Order ID to remove. \\
-\indent Bid list and order book are updated. \\ \\
+\begin{tabular}{ | l | p{10cm} |}\hline
+	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker indicates they want to remove a bid order. \\\hline
+	{\bf Preconditions} & The broker has an existing bid in the system. The broker knows the Order ID. \\\hline
+	{\bf Postconditions} & The Order will be removed from the system. \\\hline
+	{\bf Normal Flow} & Broker decides to remove their bid order from the system. \\
+	& System accepts the Order ID to remove. \\
+	& Bid list and order book are updated.  \\\hline
+\end{tabular} \\\\
 
 \noindent {\bf Use Case 6}: Deleting an Ask Order \\ 
-{\bf Actors}:\\
-\indent Broker \\
-{\bf Triggers}: \\
-\indent The broker indicates they want to remove an ask order. \\
-{\bf Preconditions}: \\
-\indent The broker has an existing ask in the system. The broker knows the Order ID.\\
-{\bf Postconditions}: \\
-\indent The Order will be removed from the system. \\
-{\bf Normal Flow}: \\
-\indent Broker decides to remove their ask order from the system. \\
-\indent System accepts the Order ID to remove. \\
-\indent Ask list and order book are updated. \\ \\
+\begin{tabular}{ | l | p{10cm} |}\hline
+	{\bf Actors} & Broker \\\hline
+	{\bf Triggers} & The broker indicates they want to remove an ask order. \\\hline
+	{\bf Preconditions} & The broker has an existing ask in the system. The broker knows the Order ID. \\\hline
+	{\bf Postconditions} & The Order will be removed from the system.  \\\hline
+	{\bf Normal Flow} & Broker decides to remove their ask order from the system. \\
+	& System accepts the Order ID to remove. \\
+	& Ask list and order book are updated. \\\hline
+\end{tabular} \\\\
 
 \begin {landscape}
 \section {Architecture Diagram}
