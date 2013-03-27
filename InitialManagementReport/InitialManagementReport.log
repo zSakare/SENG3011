@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.7)  26 MAR 2013 12:09
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.4)  27 MAR 2013 16:50
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **InitialManagementReport.tex
 (./InitialManagementReport.tex
@@ -179,6 +180,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (6.09521pt too wide) in paragraph at lines 56--69
+[] 
+ []
+
 [1] (./InitialManagementReport.toc)
 \tf@toc=\write3
 \openout3 = `InitialManagementReport.toc'.
@@ -193,86 +198,86 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout5 = `InitialManagementReport.lot'.
 
  [4]
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--120
+Underfull \hbox (badness 10000) in paragraph at lines 94--119
 
  []
 
 [1]
-Underfull \hbox (badness 10000) in paragraph at lines 126--134
+Underfull \hbox (badness 10000) in paragraph at lines 125--133
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--134
+Underfull \hbox (badness 10000) in paragraph at lines 125--133
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--148
+Underfull \hbox (badness 10000) in paragraph at lines 135--147
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--148
+Underfull \hbox (badness 10000) in paragraph at lines 135--147
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--160
+Underfull \hbox (badness 10000) in paragraph at lines 148--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--160
+Underfull \hbox (badness 10000) in paragraph at lines 148--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--173
+Underfull \hbox (badness 10000) in paragraph at lines 160--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--173
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--184
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--184
+Underfull \hbox (badness 10000) in paragraph at lines 160--172
 
  []
 
 [2]
+Underfull \hbox (badness 10000) in paragraph at lines 174--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--184
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 185--195
 
  []
@@ -368,39 +373,49 @@ File: images/deleteAskOrder.png Graphic file (type png)
 Package pdftex.def Info: images/deleteAskOrder.png used on input line 257.
 (pdftex.def)             Requested size: 424.58624pt x 299.72688pt.
  [9 <./images/deleteBidOrder.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 267--272
+Underfull \hbox (badness 10000) in paragraph at lines 263--269
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--278
+Underfull \hbox (badness 10000) in paragraph at lines 270--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
+Underfull \hbox (badness 10000) in paragraph at lines 284--289
+
+ []
+
+[10 <./images/deleteAskOrder.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 292--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--288
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 
  []
 
-[10 <./images/deleteAskOrder.png>] [11] (./InitialManagementReport.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 300--305
+
+ []
+
+[11] (./InitialManagementReport.aux) ) 
 Here is how much of TeX's memory you used:
  1694 strings out of 493488
  24920 string characters out of 3141327
- 85317 words of memory out of 3000000
+ 83317 words of memory out of 3000000
  4980 multiletter control sequences out of 15000+200000
  4659 words of font info for 18 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  37i,8n,23p,327b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/l
-ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/lo
-cal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on InitialManagementReport.pdf (16 pages, 281457 bytes).
+</usr/local/texlive/2012/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2012/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb>
+Output written on InitialManagementReport.pdf (16 pages, 282867 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  46 compressed objects within 1 object stream
