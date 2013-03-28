@@ -1,6 +1,0 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Use Cases}{2}
-\contentsline {section}{\numberline {3}Architecture Diagram}{4}
-\contentsline {section}{\numberline {4}Sequence Diagram}{6}
-\contentsline {section}{\numberline {5}Justification of chosen Language and Environment}{6}
-\contentsline {section}{\numberline {6}Project Plan}{6}
