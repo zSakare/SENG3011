@@ -3,7 +3,8 @@ package main.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import main.Order;
+import main.implementations.order.Order;
+import main.parser.SircaOrder;
 
 public interface Orderbook {
 
@@ -11,8 +12,7 @@ public interface Orderbook {
 	 * Set the existing bid list in the orderbook to provided list of orders.
 	 * This function should additionally remove all the existing bid order mappings in the orderbook
 	 * and recreate the matching orders in the order book.
-	 * 
-	 * @param bidList - the bid list to replace the current bid list with.
+	 * @param bidList TODO
 	 */
 	public void setBidList(List<Order> bidList);
 	

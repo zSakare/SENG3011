@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2013.3.26)  27 MAR 2013 22:36
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2013.3.26)  9 APR 2013 11:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -221,62 +221,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 122--130
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--144
+Underfull \hbox (badness 10000) in paragraph at lines 132--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--144
+Underfull \hbox (badness 10000) in paragraph at lines 132--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--156
+Underfull \hbox (badness 10000) in paragraph at lines 143--153
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--156
+Underfull \hbox (badness 10000) in paragraph at lines 143--153
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--169
+Underfull \hbox (badness 10000) in paragraph at lines 154--164
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--169
+Underfull \hbox (badness 10000) in paragraph at lines 154--164
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 171--181
+Underfull \hbox (badness 10000) in paragraph at lines 166--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--181
+Underfull \hbox (badness 10000) in paragraph at lines 166--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--192
+Underfull \hbox (badness 10000) in paragraph at lines 175--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--192
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--203
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--203
+Underfull \hbox (badness 10000) in paragraph at lines 175--184
 
  []
 
@@ -284,7 +274,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 193--203
 File: images/ADiagram.png Graphic file (type png)
 
 <use images/ADiagram.png>
-Overfull \hbox (33.34058pt too wide) in paragraph at lines 208--209
+Overfull \hbox (33.34058pt too wide) in paragraph at lines 189--190
  [][] 
  []
 
@@ -295,12 +285,12 @@ Overfull \hbox (33.34058pt too wide) in paragraph at lines 208--209
 File: images/aSequenceDiagram.png Graphic file (type png)
 
 <use images/aSequenceDiagram.png>
-Overfull \hbox (33.34058pt too wide) in paragraph at lines 217--218
+Overfull \hbox (33.34058pt too wide) in paragraph at lines 198--199
  [][] 
  []
 
 [5 <./images/aSequenceDiagram.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 225--227
+Underfull \hbox (badness 10000) in paragraph at lines 206--208
 
  []
 
@@ -332,32 +322,32 @@ File: images/deleteBidOrder.png Graphic file (type png)
 File: images/deleteAskOrder.png Graphic file (type png)
 
 <use images/deleteAskOrder.png> [9 <./images/deleteBidOrder.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 260--266
+Underfull \hbox (badness 10000) in paragraph at lines 241--247
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--271
+Underfull \hbox (badness 10000) in paragraph at lines 248--252
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--286
+Underfull \hbox (badness 10000) in paragraph at lines 262--267
 
  []
 
 [10 <./images/deleteAskOrder.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 289--292
+Underfull \hbox (badness 10000) in paragraph at lines 270--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--302
+Underfull \hbox (badness 10000) in paragraph at lines 278--283
 
  []
 
@@ -365,16 +355,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 297--302
 Here is how much of TeX's memory you used:
  1500 strings out of 493747
  21841 string characters out of 3143546
- 79614 words of memory out of 3000000
+ 77614 words of memory out of 3000000
  4780 multiletter control sequences out of 15000+200000
  4659 words of font info for 18 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 37i,8n,23p,327b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,23p,249b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2010/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2010/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2010/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr10.pfb>
-Output written on InitialManagementReport.pdf (15 pages, 328420 bytes).
+Output written on InitialManagementReport.pdf (15 pages, 327623 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream

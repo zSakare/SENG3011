@@ -129,76 +129,57 @@ From discussion between our members we were able to establish the following Use 
 \\
 
 
-\noindent{\bf Use Case 1}: Placing a bid Order \\
+\noindent{\bf Use Case 1}: Reading Correctly Formatted Sirca File \\
     \begin{tabular}{ | l | p{10cm} |}
     \hline
-    	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker indicates they want to place a bid order. \\\hline
-	{\bf Preconditions} & The broker has selected a price and quantity for the specific security. \\\hline
-	{\bf Postconditions} & The order will be placed in the system. \\
-	& The broker will have a Order ID for the bid. \\\hline
-	{\bf Normal Flow} & Broker decides on a bid price and quantity for a specific security. \\
-	& System accepts bid with bid price, appends to bid list and Order Book. \\
-	& System returned generated order id to broker. \\\hline
+    	{\bf Actors} & User \\\hline
+	{\bf Triggers} & The user starts the program. \\\hline
+	{\bf Preconditions} & The user has a correctly formatted Sirca file. \\\hline
+	{\bf Postconditions} & The system will be populated with orders \\\hline
+	{\bf Normal Flow} & The system starts up, reads in the CSV file and\\
+	& prepares the order book of trades.\\\hline
     \end{tabular} \\\\
 
-\noindent {\bf Use Case 2}: Placing an Ask Order \\ 
+\noindent {\bf Use Case 2}: Choosing an Algorithmic Trading Strategy \\ 
 \begin{tabular}{ | l | p{10cm} |}\hline
-	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker indicates they want to place an ask order.  \\\hline
-	{\bf Preconditions} & The broker has selected a price and quantity for the specific security. \\\hline
-	{\bf Postconditions} & The order will be placed in the system.  \\
-	& The broker will have a Order ID for the ask order. \\\hline
-	{\bf Normal Flow} & Broker decides on an ask price and quantity for a specific security. \\
-	& System accepts with ask price, appends to ask list and Order Book. \\
-	& System returned generated Order ID to broker. \\\hline
+	{\bf Actors} & User \\\hline
+	{\bf Triggers} & User decides on a trade strategy to try.\\\hline
+	{\bf Preconditions} & User has a decided quantity and strategy to trade with. \\\hline
+	{\bf Postconditions} & System generates new orders based on specified quantity. \\\hline
+	{\bf Normal Flow} & User indicates trading strategy, \\
+	& system accepts trade strategy, generates the appropriate \\
+	& bids and ask orders and sends it to the trade engine. \\\hline
 \end{tabular} \\\\
 
-\noindent {\bf Use Case 3}: Amending a Bid Order \\ 
+\noindent {\bf Use Case 3}: Generating Trades for the Day \\ 
 \begin{tabular}{ | l | p{10cm} |}\hline
-	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker indicates they want to amend a bid order. \\\hline
-	{\bf Preconditions} & The broker has indicated a change in the original price or quantity for the specific security. \\
-	& The bid Order ID will already be in the system.  \\\hline
-	{\bf Postconditions} & The broker will have a new Order ID for amended Order. \\\hline
-	{\bf Normal Flow} & Broker decides on a change on price or quantity for original bid order. \\
-	& System accepts the new price/quantity. \\
-	& Cancels the old Order ID. \\
-	& Creates a new Order ID. \\\hline
+	{\bf Actors} & User \\\hline
+	{\bf Triggers} & User has chosen trading strategy and sent it to engine. \\\hline
+	{\bf Preconditions} & Algorithmic trades are ready to process and a set of \\
+	& orders have already been read in. \\\hline
+	{\bf Postconditions} & All algorithmic trades are executed and ready for evaluation. \\\hline
+	{\bf Normal Flow} & User tells system to continue with selected trades. \\
+	& System executes the algorithmic trades and prepares for evaluation. \\\hline
 \end{tabular} \\\\
 
 \newpage
-\noindent {\bf Use Case 4}: Amending an Ask Order \\ 
+\noindent {\bf Use Case 4}: Evaluating Algorithmic Trades \\ 
 \begin{tabular}{ | l | p{10cm} |}\hline
-	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker wants to change the price or amount of their existing ask order.  \\\hline
-	{\bf Preconditions} & The broker has an existing ask Order. \\
-	& The broker wants to change the ask price or ask amount. \\\hline
-	{\bf Postconditions} & The previous Order gets deleted. \\
-	& A new order is created with the new ask price and amount. \\\hline
-	{\bf Normal Flow} & The broker wants to update an existing order so the previous order is deleted and an new order is created. This prevents cheating as orders are prioritised by time, and a broker can take advantage of their placement in the queue to match a sell order. \\\hline
+	{\bf Actors} & User \\\hline
+	{\bf Triggers} & User wishes to determine the effectiveness of the strategy \\\hline
+	{\bf Preconditions} & Algorithmic trades have been processed. \\\hline
+	{\bf Postconditions} & The user is given feedback based on the algorithmic trades. \\\hline
+	{\bf Normal Flow} & User asks for an evaluation, system finds the percentage gained or lost. \\\hline
 \end{tabular} \\\\
 
-\noindent {\bf Use Case 5}: Deleting a Bid Order \\ 
+\noindent {\bf Use Case 5}: Generating Strategy Performance Report \\ 
 \begin{tabular}{ | l | p{10cm} |}\hline
-	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker indicates they want to remove a bid order. \\\hline
-	{\bf Preconditions} & The broker has an existing bid in the system. The broker knows the Order ID. \\\hline
-	{\bf Postconditions} & The Order will be removed from the system. \\\hline
-	{\bf Normal Flow} & Broker decides to remove their bid order from the system. \\
-	& System accepts the Order ID to remove. \\
-	& Bid list and order book are updated.  \\\hline
-\end{tabular} \\\\
-
-\noindent {\bf Use Case 6}: Deleting an Ask Order \\ 
-\begin{tabular}{ | l | p{10cm} |}\hline
-	{\bf Actors} & Broker \\\hline
-	{\bf Triggers} & The broker indicates they want to remove an ask order. \\\hline
-	{\bf Preconditions} & The broker has an existing ask in the system. The broker knows the Order ID. \\\hline
-	{\bf Postconditions} & The Order will be removed from the system.  \\\hline
-	{\bf Normal Flow} & Broker decides to remove their ask order from the system. \\
-	& System accepts the Order ID to remove. \\
-	& Ask list and order book are updated. \\\hline
+	{\bf Actors} & User \\\hline
+	{\bf Triggers} & User wants to see a performance report \\\hline
+	{\bf Preconditions} & A strategy has been executed. \\\hline
+	{\bf Postconditions} & A report will be generated for the user. \\\hline
+	{\bf Normal Flow} & User asks system to generate strategy performance report. \\
+	& System provides a performance report to the user.\\\hline
 \end{tabular} \\\\
 
 \begin {landscape}

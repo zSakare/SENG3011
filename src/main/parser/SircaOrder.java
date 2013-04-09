@@ -1,6 +1,6 @@
-package main;
+package main.parser;
 
-public class Order {
+public class SircaOrder {
 	
 	private String instrument;
 	private String date;
