@@ -1,8 +1,7 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Architectural Diagram.}}{4}
 \contentsline {figure}{\numberline {2}{\ignorespaces Model Architectural Diagram.}}{5}
-\contentsline {figure}{\numberline {3}{\ignorespaces Use Case 1: addBidOrder}}{6}
-\contentsline {figure}{\numberline {4}{\ignorespaces Use Case 2: addAskOrder}}{6}
-\contentsline {figure}{\numberline {5}{\ignorespaces Use Case 3: amendBidOrder}}{7}
-\contentsline {figure}{\numberline {6}{\ignorespaces Use Case 4: amendAskOrder}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Use Case 5: deleteBidOrder}}{9}
-\contentsline {figure}{\numberline {8}{\ignorespaces Use Case 6: deleteAskOrder}}{10}
+\contentsline {figure}{\numberline {3}{\ignorespaces Use Case 1: Reading correctly formatted Sirca files}}{6}
+\contentsline {figure}{\numberline {4}{\ignorespaces Use Case 2: Choosing an Algorithmic Trading Strategy}}{6}
+\contentsline {figure}{\numberline {5}{\ignorespaces Use Case 3: Generating Trades for the Day}}{7}
+\contentsline {figure}{\numberline {6}{\ignorespaces Use Case 4: Evaluating Algorithmic Trades}}{7}
+\contentsline {figure}{\numberline {7}{\ignorespaces Use Case 5: Generating Strategy Report}}{8}

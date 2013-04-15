@@ -64,6 +64,8 @@
 	v1.5 & 26/03/2013 & Group02 & Added in Project Plan		\\\hline
 	v1.6 & 26/03/2013 & Group02 & Layout for Use Cases changed 		\\\hline
 	v1.7 & 27/03/2013 & Group02 & Added in Justification of Chose Language and Envrionment 		\\\hline
+	v2.1 & 9/04/2013 & Group02 & Changed Use Cases 		\\\hline
+	v2.2 & 15/04/2013 & Group02 & Added in new Use Cases		\\\hline
 \end{tabular}
 
 \pagebreak
@@ -120,12 +122,11 @@ We will also aim to meet the Quality Requirements: \\
 \section {Use Cases}
 
 From discussion between our members we were able to establish the following Use Cases: \\
-\indent\indent	1. Placing a Bid Order	\\
-\indent\indent	2. Placing an Ask Order 	\\	
-\indent\indent	3. Amending a Bid Order 	\\
-\indent\indent 	4. Amending an Ask Order \\	
-\indent\indent	5. Deleting a Bid Order	\\
-\indent\indent	6. Deleting an Ask Order 	\\ 
+\indent\indent	1. Reading Correctly Formatted Sirca File	\\
+\indent\indent	2. Choosing an Algorithmic Trading Strategy 	\\	
+\indent\indent	3. Generating Trades for the Day	\\
+\indent\indent 	4. Evaluating Algorithmic Trades \\	
+\indent\indent	5. Generating Strategy Report	\\
 \\
 
 
@@ -207,34 +208,31 @@ The following are the Sequence Diagrams created created in parallel to the Use C
 created by our team. \\
 
 \begin{figure}[H] 
-   \includegraphics[width=1\textwidth]{images/addBidOrder}
-   \caption{Use Case 1: addBidOrder}
+   \includegraphics[width=1\textwidth]{images/readingSirca}
+   \caption{Use Case 1: Reading correctly formatted Sirca files}
 \end{figure}
 
 \begin{figure}[H]
-   \includegraphics[width=1\textwidth]{images/addAskOrder}
-   \caption{Use Case 2: addAskOrder}
+   \includegraphics[width=1\textwidth]{images/choosingAlgoStrat}
+   \caption{Use Case 2: Choosing an Algorithmic Trading Strategy}
 \end{figure}
 
 \begin{figure}[H]
-   \includegraphics[width=1\textwidth]{images/amendBidOrder}
-    \caption{Use Case 3: amendBidOrder}
+   \includegraphics[width=1\textwidth]{images/generatingTrades}
+    \caption{Use Case 3: Generating Trades for the Day}
 \end{figure}
 
 \begin{figure}[H]
    \includegraphics[width=1\textwidth]{images/amendAskOrder}
-   \caption{Use Case 4: amendAskOrder}
+   \caption{Use Case 4: Evaluating Algorithmic Trades}
 \end{figure}
 
 \begin{figure}[H]
    \includegraphics[width=1\textwidth]{images/deleteBidOrder}
-   \caption{Use Case 5: deleteBidOrder}
+   \caption{Use Case 5: Generating Strategy Report}
 \end{figure}
 
-\begin{figure}[H]
-   \includegraphics[width=1\textwidth]{images/deleteAskOrder}
-   \caption{Use Case 6: deleteAskOrder}
-\end{figure}
+\newpage
 
 \section {Justification of chosen Language and Environment}
 
@@ -254,6 +252,8 @@ informative interface to show past commits and if required, separate branches of
 \indent Everyone will be developing in Eclipse as it is quite a versatile and powerful open source IDE. \\
 It is also extensively integrated with JUnit and will reduce some of the work required to set up \\
 a testing environment for our system.
+
+\newpage
 
 \section {Project Plan}
 
