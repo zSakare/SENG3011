@@ -1,19 +1,30 @@
 package main.implementations;
 
-import java.util.ArrayList;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.Order;
+import main.interfaces.OrderBuilder;
 import main.interfaces.Orderbook;
+import main.utils.TimeUtil;
 
 public class OrderbookImpl implements Orderbook {
 
+
+	private static final int FIRST_ELEMENT = 0;
+	private static final String RANDOM_BROKER_ID = "6969";
+	private static final String ORDER_BID = "bid";
+	private static final String ORDER_ASK = "ask";
 	private List<Order> bidList;
 	private List<Order> askList;
 	private Map<Order, Order> orderbook;
+	
 
 	public OrderbookImpl(List<Order> bidList, List<Order> askList) {
 		this.bidList = bidList;
@@ -84,6 +95,78 @@ public class OrderbookImpl implements Orderbook {
 		}
 	}
 
+	/*
+	public void newBid (String instrument, Date dateTime, String recordType, double price,
+							int volume, int undisclosedVolume, double value, String qualifiers,
+							String transactionId, String bidId, String askId, boolean isBid,
+							Date entryTime, double oldPrice, int oldVolume, String buyerBrokerId,
+							String sellerBrokerId) {
+	*/
+	
+	public void newBid (String volume) { 
+ 
+		String instrument = bidList.get(FIRST_ELEMENT).getInstrument();
+		Date date = bidList.get(FIRST_ELEMENT).getDateTime();
+		Calendar dateSetter = Calendar.getInstance();
+		dateSetter.setTime(date);
+		dateSetter.set(Calendar.HOUR_OF_DAY, TimeUtil.generateHour());
+		dateSetter.set(Calendar.MINUTE, TimeUtil.generateMinute());
+		dateSetter.set(Calendar.MILLISECOND, TimeUtil.generateMillis());
+		dateSetter.set(Calendar.SECOND, TimeUtil.generateSeconds());
+		date = dateSetter.getTime();
+		String buyerBrokerId = RANDOM_BROKER_ID;
+		String bidOrAsk = ORDER_BID;
+		double lowest = askList.get(FIRST_ELEMENT).getPrice();
+		for (Order ask : askList) {
+			 if (lowest < ask.getPrice()) { 
+				 lowest = ask.getPrice();
+			 }
+		}
+		
+		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+										date,
+										lowest,
+										volume,
+										bidOrAsk,
+										buyerBrokerId);
+		
+		bidList.add(orderBuilder.build());
+	}
+	
+	public void newAsk (String volume) { 
+
+		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
+		Date date = askList.get(FIRST_ELEMENT).getDateTime();
+		Calendar dateSetter = Calendar.getInstance();
+		dateSetter.setTime(date);
+		dateSetter.set(Calendar.HOUR_OF_DAY, TimeUtil.generateHour());
+		dateSetter.set(Calendar.MINUTE, TimeUtil.generateMinute());
+		dateSetter.set(Calendar.MILLISECOND, TimeUtil.generateMillis());
+		dateSetter.set(Calendar.SECOND, TimeUtil.generateSeconds());
+		date = dateSetter.getTime();
+		String sellerBrokerId = RANDOM_BROKER_ID;
+		String bidOrAsk = ORDER_ASK;
+		double highest = bidList.get(FIRST_ELEMENT).getPrice();
+		
+		for (Order bid : bidList) {
+			 if (highest > bid.getPrice()) { 
+				 highest = bid.getPrice();
+			 }
+		}
+		
+		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+										date,
+										highest,
+										volume,
+										bidOrAsk,
+										sellerBrokerId);
+		
+		askList.add(orderBuilder.build());	
+	}
+	
+	
+	
+	
 	/**
 	 * Helper function that cleans up the current state of the orderbook and repopulates it based on the new bid or ask list.
 	 */

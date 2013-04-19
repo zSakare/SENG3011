@@ -4,12 +4,37 @@ import java.util.Random;
 import java.sql.Time;
 
 public class TimeUtil {
-	public static Time generateTime() {
+	private static final int HOURS_IN_A_DAY = 24;
+	private static final int MINUTES_IN_AN_HOUR = 60;
+	private static final int SECONDS_IN_A_MINUTE = 60;
+	private static final int MILLISECONDS_IN_A_SECOND = 1000;
+	private static final int MILLIS_IN_A_DAY = HOURS_IN_A_DAY * MINUTES_IN_AN_HOUR * SECONDS_IN_A_MINUTE * MILLISECONDS_IN_A_SECOND;
 	
-		final Random random = new Random();
-		final int millisInDay = 24*60*60*1000;
-		Time time = new Time((long)random.nextInt(millisInDay));
+	public static Time generateTime() {
+		Time time = new Time((long)generateInt(MILLIS_IN_A_DAY));
 
 		return time;
+	}
+	
+	public static int generateHour() {
+		return generateInt(HOURS_IN_A_DAY);
+	}
+	
+	public static int generateMinute() {
+		return generateInt(MINUTES_IN_AN_HOUR);
+	}
+	
+	public static int generateSeconds() {
+		return generateInt(SECONDS_IN_A_MINUTE);
+	}
+	
+	public static int generateMillis() {
+		return generateInt(MILLISECONDS_IN_A_SECOND);
+	}
+	
+	private static int generateInt(int timeFrame) {
+		final Random random = new Random();
+		
+		return random.nextInt(timeFrame);
 	}
 }	
