@@ -16,7 +16,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 public class SircaCSVParser {
 	
-	public static void input() {
+	public static Orderbook input() {
 		ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
 		strat.setType(SircaOrder.class);
 		String[] columns = new String[] {"instrument", "date", "time", "recordType", "price", "volume", "undisclosedVolume", "value","qualifiers", "transactionId", "bidId","askId", "bidOrAsk","entryTime","oldPrice", "oldVolume", "buyerBrokerId", "sellerBrokerId" }; // the fields to bind do in your JavaBean
@@ -33,7 +33,9 @@ public class SircaCSVParser {
 		}
 
 		List list = csv.parse(strat, csvReader);
+		System.out.println("Sirca data loaded to system.....");
 		
+		System.out.println("Converting plain text data to descriptive orders.....");
 		// bid and ask lists.
 		List<Order> bidList = new ArrayList<Order>();
 		List<Order> askList = new ArrayList<Order>();
@@ -41,17 +43,22 @@ public class SircaCSVParser {
 		for (Object object : list) {
 		    SircaOrder order = (SircaOrder) object;
 		    OrderBuilder orderBuilder = new OrderBuilderImpl(order);
-		    if (("B").equals(order.getBidOrAsk())) {
-		    	bidList.add(orderBuilder.build());
-		    } else if (("A").equals(order.getBidOrAsk())) {
-		    	askList.add(orderBuilder.build());
+		    if (("ENTER").equals(order.getRecordType())) {
+			    if (("B").equals(order.getBidOrAsk())) {
+			    	bidList.add(orderBuilder.build());
+			    } else if (("A").equals(order.getBidOrAsk())) {
+			    	askList.add(orderBuilder.build());
+			    }
 		    }
 	    }
 		
+		System.out.println("Populating orderbook.....");
 		Orderbook orderbook = new OrderbookImpl(bidList, askList);
 		long timeAfter = System.currentTimeMillis();
 		
+		System.out.println("Ready!");
 		System.out.println("Total time taken: " + (timeAfter - timeBefore));
+		return orderbook;
 	}
 }
 

@@ -1,9 +1,7 @@
 package main.implementations;
 
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,8 +18,8 @@ public class OrderbookImpl implements Orderbook {
 
 	private static final int FIRST_ELEMENT = 0;
 	private static final String RANDOM_BROKER_ID = "6969";
-	private static final String ORDER_BID = "bid";
-	private static final String ORDER_ASK = "ask";
+	private static final String ORDER_BID = "B";
+	private static final String ORDER_ASK = "A";
 	private List<Order> bidList;
 	private List<Order> askList;
 	private Map<Order, Order> orderbook;
@@ -31,7 +29,7 @@ public class OrderbookImpl implements Orderbook {
 		this.bidList = bidList;
 		this.askList = askList;
 		this.orderbook = new HashMap<Order, Order>();
-		populateOrderbook();
+		//populateOrderbook();
 	}
 	
 	@Override
@@ -104,7 +102,7 @@ public class OrderbookImpl implements Orderbook {
 							String sellerBrokerId) {
 	*/
 	
-	public void newBid (String volume) { 
+	public Trade newBid (String volume) { 
  
 		String instrument = bidList.get(FIRST_ELEMENT).getInstrument();
 		Date date = bidList.get(FIRST_ELEMENT).getDateTime();
@@ -117,6 +115,7 @@ public class OrderbookImpl implements Orderbook {
 		date = dateSetter.getTime();
 		String buyerBrokerId = RANDOM_BROKER_ID;
 		String bidOrAsk = ORDER_BID;
+		
 		double lowest = askList.get(FIRST_ELEMENT).getPrice();
 		for (Order ask : askList) {
 			 if (lowest < ask.getPrice()) { 
@@ -131,10 +130,13 @@ public class OrderbookImpl implements Orderbook {
 										bidOrAsk,
 										buyerBrokerId);
 		
-		bidList.add(orderBuilder.build());
+		Order newOrder = orderBuilder.build();
+		bidList.add(newOrder);	
+		
+		return tradeMatcher(newOrder);
 	}
 	
-	public void newAsk (String volume) { 
+	public Trade newAsk (String volume) { 
 
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		Date date = askList.get(FIRST_ELEMENT).getDateTime();
@@ -147,8 +149,8 @@ public class OrderbookImpl implements Orderbook {
 		date = dateSetter.getTime();
 		String sellerBrokerId = RANDOM_BROKER_ID;
 		String bidOrAsk = ORDER_ASK;
-		double highest = bidList.get(FIRST_ELEMENT).getPrice();
 		
+		double highest = bidList.get(FIRST_ELEMENT).getPrice();
 		for (Order bid : bidList) {
 			 if (highest > bid.getPrice()) { 
 				 highest = bid.getPrice();
@@ -162,7 +164,10 @@ public class OrderbookImpl implements Orderbook {
 										bidOrAsk,
 										sellerBrokerId);
 		
-		askList.add(orderBuilder.build());	
+		Order newOrder = orderBuilder.build();
+		askList.add(newOrder);	
+		
+		return tradeMatcher(newOrder);
 	}
 	
 	public Trade tradeMatcher (Order orderToCompare) { 
@@ -185,6 +190,7 @@ public class OrderbookImpl implements Orderbook {
 				}
 			}
 		}
+		
 		return matchedTrade;
 	}
 	

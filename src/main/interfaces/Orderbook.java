@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.Order;
-import main.parser.SircaOrder;
+import main.implementations.order.Trade;
 
 public interface Orderbook {
 
@@ -55,5 +55,21 @@ public interface Orderbook {
 	 * if a bid order is input, an ask order is returned & vice versa.
 	 */
 	public Order getMatch(Order order);
+
+	/**
+	 * Generate new ask order given a volume.
+	 * 
+	 * @param volume - number of stock to generate in order.
+	 * @return trade - returns a matched trade.
+	 */
+	public Trade newAsk(String volume);
+
+	/**
+	 * Generate new bid order given a volume.
+	 * 
+	 * @param volume - number of stock to generate in order.
+	 * @return trade - returns a matched trade.
+	 */
+	public Trade newBid(String volume);
 
 }

@@ -45,8 +45,10 @@ public class TradeStrategyEvaluator {
 			}
 		}
 		
+		System.out.println("Profit is: $" + profit + " Purchase price is: $" + purchasePrice);
 		// Calculate percentage gained/lost
-		return (profit - purchasePrice)/purchasePrice;
+		double percent = (profit - purchasePrice)/purchasePrice;
+		return percent;
 	}
 	
 	private List<Trade> tradeList;
