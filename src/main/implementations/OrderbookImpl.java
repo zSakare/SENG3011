@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.Order;
+import main.implementations.order.Trade;
 import main.interfaces.OrderBuilder;
 import main.interfaces.Orderbook;
 import main.utils.TimeUtil;
@@ -164,6 +165,28 @@ public class OrderbookImpl implements Orderbook {
 		askList.add(orderBuilder.build());	
 	}
 	
+	public Trade tradeMatcher (Order orderToCompare) { 
+		
+		Order matchedOrder = null;
+		Trade matchedTrade = null;
+		
+		if (orderToCompare.isBid()) { 
+			for (Order ask : askList) { 
+				if (orderToCompare.getPrice() == ask.getPrice()) {
+					matchedOrder = ask; 
+					matchedTrade = new Trade(orderToCompare, matchedOrder);
+				}
+			}
+		} else { 
+			for (Order bid : bidList) { 
+				if (orderToCompare.getPrice () == bid.getPrice()) { 
+					matchedOrder = bid;
+					matchedTrade = new Trade(matchedOrder, orderToCompare);
+				}
+			}
+		}
+		return matchedTrade;
+	}
 	
 	
 	
