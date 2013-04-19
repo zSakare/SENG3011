@@ -45,7 +45,8 @@ public class TradeStrategyEvaluator {
 			}
 		}
 		
-		System.out.println("Profit is: $" + profit + " Purchase price is: $" + purchasePrice);
+		// print the prices to 2 decimal places.
+		System.out.printf("Total sold: $%.2f\nTotal bought: $%.2f\n", profit, purchasePrice);
 		// Calculate percentage gained/lost
 		double percent = (profit - purchasePrice)/purchasePrice;
 		return percent;

@@ -1,6 +1,7 @@
 package main.engine;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,6 +36,8 @@ public class Runner {
 		
 		double evaluation = evaluator.calculateProfitLoss();
 		evaluation = evaluation*100;
-		System.out.println("You made a profit of: " + evaluation + "%");
+		
+		// print return to 2 decimal places.
+		System.out.printf("Percentage return: %.2f%%\n", evaluation);
 	}
 }
