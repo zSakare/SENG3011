@@ -1,5 +1,6 @@
 package main.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +10,6 @@ import main.implementations.order.Order;
 import main.interfaces.Orderbook;
 
 public class OrderbookImpl implements Orderbook {
-
 
 	private List<Order> bidList;
 	private List<Order> askList;
