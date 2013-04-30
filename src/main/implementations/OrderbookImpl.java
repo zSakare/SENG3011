@@ -22,16 +22,19 @@ public class OrderbookImpl implements Orderbook {
 	private static final String ORDER_ASK = "A";
 	private List<Order> bidList;
 	private List<Order> askList;
+	private List<Order> tradeList;
 	private Map<Order, Order> orderbook;
 	
 
-	public OrderbookImpl(List<Order> bidList, List<Order> askList) {
+	public OrderbookImpl(List<Order> bidList, List<Order> askList, List<Order> tradeList) {
 		this.bidList = bidList;
 		this.askList = askList;
+		this.tradeList = tradeList;
 		this.orderbook = new HashMap<Order, Order>();
 		//populateOrderbook();
 	}
-	
+
+
 	@Override
 	public void setBidList(List<Order> bidList) {
 		
@@ -221,4 +224,9 @@ public class OrderbookImpl implements Orderbook {
 			}
 		}
 	}
+	
+	public List<Order> getTradeList() {
+		return tradeList;	
+	}
 }
+
