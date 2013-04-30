@@ -2,6 +2,9 @@ package main.implementations.order;
 
 import java.util.Date;
 
+/**
+ * Descriptive Order class with type meaningful fields. 
+ */
 public class Order {
 	
 	private String instrument;

@@ -1,5 +1,8 @@
 package main.parser;
 
+/**
+ * CSV parsed orders. Non type descriptive fields for each order, bare bones for containing basic information. 
+ */
 public class SircaOrder {
 	
 	private String instrument;

@@ -4,6 +4,9 @@ import java.util.Date;
 
 import main.implementations.order.Order;
 
+/**
+ * Builder interface for orders
+ */
 public interface OrderBuilder {
 	
 	/**

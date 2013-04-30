@@ -8,6 +8,9 @@ import main.implementations.order.Order;
 import main.interfaces.OrderBuilder;
 import main.parser.SircaOrder;
 
+/**
+ * Order helper class to build orders based on given parameters and parsed orders from csv files. 
+ */
 public class OrderBuilderImpl implements OrderBuilder {
 	
 	private String security;	

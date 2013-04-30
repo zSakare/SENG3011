@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.Order;
-import main.implementations.order.Trade;
+import main.implementations.order.AlgorithmicTrade;
 
+/**
+ * Orderbook interface which handles order generating and trade generating. 
+ */
 public interface Orderbook {
 
 	/**
@@ -41,28 +44,12 @@ public interface Orderbook {
 	public List<Order> getAskList();
 	
 	/**
-	 * Returns the current orderbook.
-	 * 
-	 * @return the orderbook.
-	 */
-	public Map<Order, Order> getOrderbook();
-	
-	/**
-	 * Finds a matching order in the orderbook based on the order provided.
-	 * 
-	 * @param order - the order to perform a search with.
-	 * @return - returns the matching order of OPPOSITE action i.e. 
-	 * if a bid order is input, an ask order is returned & vice versa.
-	 */
-	public Order getMatch(Order order);
-
-	/**
 	 * Generate new ask order given a volume.
 	 * 
 	 * @param volume - number of stock to generate in order.
 	 * @return trade - returns a matched trade.
 	 */
-	public Trade newAsk(String volume);
+	public AlgorithmicTrade newAsk(String volume);
 
 	/**
 	 * Generate new bid order given a volume.
@@ -70,6 +57,6 @@ public interface Orderbook {
 	 * @param volume - number of stock to generate in order.
 	 * @return trade - returns a matched trade.
 	 */
-	public Trade newBid(String volume);
+	public AlgorithmicTrade newBid(String volume);
 
 }

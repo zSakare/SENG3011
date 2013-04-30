@@ -8,42 +8,39 @@ import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.Order;
-import main.implementations.order.Trade;
+import main.implementations.order.AlgorithmicTrade;
 import main.interfaces.OrderBuilder;
 import main.interfaces.Orderbook;
 import main.utils.TimeUtil;
 
+/**
+ * A list implementation of an orderbook. Contains all orders separated by ask, bid and trades. 
+ */
 public class OrderbookImpl implements Orderbook {
-
 
 	private static final int FIRST_ELEMENT = 0;
 	private static final String RANDOM_BROKER_ID = "6969";
 	private static final String ORDER_BID = "B";
 	private static final String ORDER_ASK = "A";
+	
 	private List<Order> bidList;
 	private List<Order> askList;
-	private Map<Order, Order> orderbook;
-	
 
 	public OrderbookImpl(List<Order> bidList, List<Order> askList) {
 		this.bidList = bidList;
 		this.askList = askList;
-		this.orderbook = new HashMap<Order, Order>();
-		//populateOrderbook();
 	}
 	
 	@Override
 	public void setBidList(List<Order> bidList) {
 		
 		this.bidList = bidList;
-		populateOrderbook();
 	}
 
 	@Override
 	public void setAskList(List<Order> askList) {
 		
 		this.askList = askList;
-		populateOrderbook();
 	}
 
 	@Override
@@ -58,51 +55,7 @@ public class OrderbookImpl implements Orderbook {
 		return askList;
 	}
 
-	@Override
-	public Map<Order, Order> getOrderbook() {
-
-		return orderbook;
-	}
-
-	@Override
-	public Order getMatch(Order order) {
-		
-		// Check if the order is a bid or ask order.
-		if (order.isBid()) {
-			Order askOrder = null;
-			// Is a bid order.
-			if (orderbook.containsKey(order) && bidList.contains(order)) {
-				// if it does, then returns the value which the key is mapped to
-				askOrder = orderbook.get(order);
-			}	
-
-			return askOrder;
-		} else {
-			Order buyOrder = null;
-			// Is an ask order.
-			if (orderbook.containsValue(order) && askList.contains(order)) {
-				//Find the matching bid order.
-				Iterator it = orderbook.entrySet().iterator();
-				while (it.hasNext() && buyOrder == null) {
-					Map.Entry<Order, Order> orderPair = (Map.Entry<Order, Order>) it.next();
-					if (orderPair.getValue().equals(order)) {
-						buyOrder = orderPair.getKey();
-					}
-				}
-			}
-			return buyOrder;
-		}
-	}
-
-	/*
-	public void newBid (String instrument, Date dateTime, String recordType, double price,
-							int volume, int undisclosedVolume, double value, String qualifiers,
-							String transactionId, String bidId, String askId, boolean isBid,
-							Date entryTime, double oldPrice, int oldVolume, String buyerBrokerId,
-							String sellerBrokerId) {
-	*/
-	
-	public Trade newBid (String volume) { 
+	public AlgorithmicTrade newBid (String volume) { 
  
 		String instrument = bidList.get(FIRST_ELEMENT).getInstrument();
 		Date date = bidList.get(FIRST_ELEMENT).getDateTime();
@@ -136,7 +89,7 @@ public class OrderbookImpl implements Orderbook {
 		return tradeMatcher(newOrder);
 	}
 	
-	public Trade newAsk (String volume) { 
+	public AlgorithmicTrade newAsk (String volume) { 
 
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		Date date = askList.get(FIRST_ELEMENT).getDateTime();
@@ -170,23 +123,23 @@ public class OrderbookImpl implements Orderbook {
 		return tradeMatcher(newOrder);
 	}
 	
-	public Trade tradeMatcher (Order orderToCompare) { 
+	public AlgorithmicTrade tradeMatcher (Order orderToCompare) { 
 		
 		Order matchedOrder = null;
-		Trade matchedTrade = null;
+		AlgorithmicTrade matchedTrade = null;
 		
 		if (orderToCompare.isBid()) { 
 			for (Order ask : askList) { 
 				if (orderToCompare.getPrice() == ask.getPrice()) {
 					matchedOrder = ask; 
-					matchedTrade = new Trade(orderToCompare, matchedOrder);
+					matchedTrade = new AlgorithmicTrade(orderToCompare, matchedOrder);
 				}
 			}
 		} else { 
 			for (Order bid : bidList) { 
 				if (orderToCompare.getPrice () == bid.getPrice()) { 
 					matchedOrder = bid;
-					matchedTrade = new Trade(matchedOrder, orderToCompare);
+					matchedTrade = new AlgorithmicTrade(matchedOrder, orderToCompare);
 				}
 			}
 		}
@@ -194,31 +147,4 @@ public class OrderbookImpl implements Orderbook {
 		return matchedTrade;
 	}
 	
-	
-	
-	/**
-	 * Helper function that cleans up the current state of the orderbook and repopulates it based on the new bid or ask list.
-	 */
-	private void populateOrderbook() {
-		orderbook.clear();
-		for (Order bidOrder : this.bidList) {
-			for (Order askOrder : askList) {
-				// Check if same security and price.
-				if (bidOrder.getInstrument().equals(askOrder.getInstrument()) && bidOrder.getPrice() == askOrder.getPrice()) {
-					// Map the orders if one does not already exist. If it does, compare dates and match the most recent.
-					if (orderbook.containsKey(bidOrder)) {
-						Order currentAskOrder = orderbook.get(bidOrder);
-						if (currentAskOrder.getDateTime().getTime() > askOrder.getDateTime().getTime()) {
-							// Current ask order mapping is later than the ask order, replace it.
-							orderbook.remove(bidOrder);
-							orderbook.put(bidOrder, askOrder);
-						}
-					} else {
-						// Simply put in new mapping.
-						orderbook.put(bidOrder, askOrder);
-					}
-				}
-			}
-		}
-	}
 }

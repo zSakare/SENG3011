@@ -3,6 +3,9 @@ package main.utils;
 import java.util.Random;
 import java.sql.Time;
 
+/**
+ * Utility class for generating time.
+ */
 public class TimeUtil {
 	private static final int HOURS_IN_A_DAY = 24;
 	private static final int MINUTES_IN_AN_HOUR = 60;

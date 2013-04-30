@@ -14,6 +14,9 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
+/**
+ * CSV parser class for reading in Sirca formatted orderbook data.
+ */
 public class SircaCSVParser {
 	
 	public static Orderbook input() {

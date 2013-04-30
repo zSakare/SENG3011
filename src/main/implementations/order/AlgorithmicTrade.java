@@ -1,11 +1,14 @@
 package main.implementations.order;
 
-public class Trade {
+/**
+ * A wrapper class for two matched orders. 
+ */
+public class AlgorithmicTrade {
 	
 	private Order bidOrder;
 	private Order askOrder;
 	
-	public Trade(Order bidOrder, Order askOrder) {
+	public AlgorithmicTrade(Order bidOrder, Order askOrder) {
 		this.bidOrder = bidOrder;
 		this.askOrder = askOrder;
 	}
