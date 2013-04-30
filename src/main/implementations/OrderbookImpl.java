@@ -118,9 +118,11 @@ public class OrderbookImpl implements Orderbook {
 		
 		double lowest = askList.get(FIRST_ELEMENT).getPrice();
 		for (Order ask : askList) {
-			 if (lowest < ask.getPrice()) { 
-				 lowest = ask.getPrice();
-			 }
+			if (date.before(ask.getDateTime())) { 
+				if (lowest < ask.getPrice()) { 
+					lowest = ask.getPrice();
+				}
+			}
 		}
 		
 		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -152,9 +154,11 @@ public class OrderbookImpl implements Orderbook {
 		
 		double highest = bidList.get(FIRST_ELEMENT).getPrice();
 		for (Order bid : bidList) {
-			 if (highest > bid.getPrice()) { 
-				 highest = bid.getPrice();
-			 }
+			if (date.before(bid.getDateTime())) { 
+				if (highest > bid.getPrice()) { 
+					highest = bid.getPrice();
+				}
+			}
 		}
 		
 		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
