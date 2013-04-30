@@ -42,6 +42,7 @@ public class SircaCSVParser {
 		// bid and ask lists.
 		List<Order> bidList = new ArrayList<Order>();
 		List<Order> askList = new ArrayList<Order>();
+		List<Order> tradeList = new ArrayList<Order>();
 		long timeBefore = System.currentTimeMillis();
 		for (Object object : list) {
 		    SircaOrder order = (SircaOrder) object;
@@ -52,11 +53,13 @@ public class SircaCSVParser {
 			    } else if (("A").equals(order.getBidOrAsk())) {
 			    	askList.add(orderBuilder.build());
 			    }
+		    } else if (("TRADE").equals(order.getRecordType())) {
+		    	tradeList.add(orderBuilder.build());
 		    }
 	    }
 		
 		System.out.println("Populating orderbook.....");
-		Orderbook orderbook = new OrderbookImpl(bidList, askList);
+		Orderbook orderbook = new OrderbookImpl(bidList, askList, tradeList);
 		long timeAfter = System.currentTimeMillis();
 		
 		System.out.println("Ready!");

@@ -18,7 +18,6 @@ public interface Orderbook {
 	 * @param bidList TODO
 	 */
 	public void setBidList(List<Order> bidList);
-	
 
 	/**
 	 * Set the existing ask list in the orderbook to provided list of orders.
@@ -28,7 +27,14 @@ public interface Orderbook {
 	 * @param askList - the ask list to replace the current ask list with.
 	 */
 	public void setAskList(List<Order> askList);
-	
+
+	/**
+	 * Sets the trade list to the given trade list.
+	 * 
+	 * @param tradeList - the trades to populate the orderbook with.
+	 */
+	public void setTradeList(List<Order> tradeList);
+
 	/**
 	 * Returns the current bid list.
 	 * 
@@ -42,6 +48,13 @@ public interface Orderbook {
 	 * @return the ask list.
 	 */
 	public List<Order> getAskList();
+
+	/**
+	 * Returns the trade list of trades in the orderbook.
+	 * 
+	 * @return the trade list.
+	 */
+	public List<Order> getTradeList();
 	
 	/**
 	 * Generate new ask order given a volume.

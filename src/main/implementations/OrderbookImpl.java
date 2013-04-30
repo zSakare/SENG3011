@@ -25,12 +25,15 @@ public class OrderbookImpl implements Orderbook {
 	
 	private List<Order> bidList;
 	private List<Order> askList;
+	private List<Order> tradeList;
 
-	public OrderbookImpl(List<Order> bidList, List<Order> askList) {
+	public OrderbookImpl(List<Order> bidList, List<Order> askList, List<Order> tradeList) {
 		this.bidList = bidList;
 		this.askList = askList;
+		this.tradeList = tradeList;
 	}
-	
+
+
 	@Override
 	public void setBidList(List<Order> bidList) {
 		
@@ -44,6 +47,12 @@ public class OrderbookImpl implements Orderbook {
 	}
 
 	@Override
+	public void setTradeList(List<Order> tradeList) {
+		
+		this.tradeList = tradeList;
+	}
+	
+	@Override
 	public List<Order> getBidList() {
 		
 		return bidList;
@@ -55,6 +64,11 @@ public class OrderbookImpl implements Orderbook {
 		return askList;
 	}
 
+	@Override
+	public List<Order> getTradeList() {
+		return tradeList;	
+	}
+	
 	public AlgorithmicTrade newBid (String volume) { 
  
 		String instrument = bidList.get(FIRST_ELEMENT).getInstrument();
@@ -71,9 +85,11 @@ public class OrderbookImpl implements Orderbook {
 		
 		double lowest = askList.get(FIRST_ELEMENT).getPrice();
 		for (Order ask : askList) {
-			 if (lowest < ask.getPrice()) { 
-				 lowest = ask.getPrice();
-			 }
+			if (date.before(ask.getDateTime())) { 
+				if (lowest < ask.getPrice()) { 
+					lowest = ask.getPrice();
+				}
+			}
 		}
 		
 		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -105,9 +121,11 @@ public class OrderbookImpl implements Orderbook {
 		
 		double highest = bidList.get(FIRST_ELEMENT).getPrice();
 		for (Order bid : bidList) {
-			 if (highest > bid.getPrice()) { 
-				 highest = bid.getPrice();
-			 }
+			if (date.before(bid.getDateTime())) { 
+				if (highest > bid.getPrice()) { 
+					highest = bid.getPrice();
+				}
+			}
 		}
 		
 		OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -148,3 +166,4 @@ public class OrderbookImpl implements Orderbook {
 	}
 	
 }
+
