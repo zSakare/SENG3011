@@ -5,7 +5,8 @@ package main.utils;
  */
 public enum Strategy {
 	RANDOM("R"),
-	MOMENTUM("M");
+	MOMENTUM("M"), 
+	MEAN_REVISION("MR");
 	
 	Strategy (String identifier) {
 	}

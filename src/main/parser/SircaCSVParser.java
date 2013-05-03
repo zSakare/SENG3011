@@ -19,7 +19,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
  */
 public class SircaCSVParser {
 	
-	public static Orderbook input() {
+	public static Orderbook input(String fileName) {
 		ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
 		strat.setType(SircaOrder.class);
 		String[] columns = new String[] {"instrument", "date", "time", "recordType", "price", "volume", "undisclosedVolume", "value","qualifiers", "transactionId", "bidId","askId", "bidOrAsk","entryTime","oldPrice", "oldVolume", "buyerBrokerId", "sellerBrokerId" }; // the fields to bind do in your JavaBean
@@ -27,12 +27,13 @@ public class SircaCSVParser {
 		 
 		CsvToBean csv = new CsvToBean();
 		 
-		String csvFilename = "./resources/sircaInput.csv";
+		String csvFilename = "./resources/" + fileName;
 		CSVReader csvReader = null;
 		try {
 			csvReader = new CSVReader(new FileReader(csvFilename), ',', '\'', 2);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.err.println("Unable to find the specified file. Make sure it is in the resources folder.");
+			return null;
 		}
 
 		List list = csv.parse(strat, csvReader);

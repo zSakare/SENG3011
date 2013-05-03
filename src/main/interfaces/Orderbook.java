@@ -1,10 +1,10 @@
 package main.interfaces;
 
 import java.util.List;
-import java.util.Map;
 
-import main.implementations.order.Order;
 import main.implementations.order.AlgorithmicTrade;
+import main.implementations.order.Order;
+import main.utils.Strategy;
 
 /**
  * Orderbook interface which handles order generating and trade generating. 
@@ -15,7 +15,7 @@ public interface Orderbook {
 	 * Set the existing bid list in the orderbook to provided list of orders.
 	 * This function should additionally remove all the existing bid order mappings in the orderbook
 	 * and recreate the matching orders in the order book.
-	 * @param bidList TODO
+	 * @param bidList - the bid list to replace the current bid list with.
 	 */
 	public void setBidList(List<Order> bidList);
 
@@ -57,19 +57,11 @@ public interface Orderbook {
 	public List<Order> getTradeList();
 	
 	/**
-	 * Generate new ask order given a volume.
+	 * Generate new orders based on strategy provided. 
 	 * 
-	 * @param volume - number of stock to generate in order.
-	 * @return trade - returns a matched trade.
+	 * @param strategy - the strategy to use.
+	 * @param volume - the amount to sell or buy
 	 */
-	public AlgorithmicTrade newAsk(String volume);
-
-	/**
-	 * Generate new bid order given a volume.
-	 * 
-	 * @param volume - number of stock to generate in order.
-	 * @return trade - returns a matched trade.
-	 */
-	public AlgorithmicTrade newBid(String volume);
+	public List<AlgorithmicTrade> runStrategy(Strategy strategy, String volume);
 
 }
