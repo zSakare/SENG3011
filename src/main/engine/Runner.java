@@ -61,8 +61,18 @@ public class Runner {
 							strategy = "";
 						}
 					}
-					System.out.println("Please Enter quantity to trade");
-					String volume = keyIn.next();
+					String volume = "";
+					while (volume.isEmpty()) {
+						System.out.println("Please Enter quantity to trade");
+						volume = keyIn.next();
+						try {
+							Integer.parseInt(volume);
+						} catch (NumberFormatException e) {
+							System.err.println("Please enter a valid integer.");
+							volume = "";
+						}
+					}
+					
 					System.out.println("Simulating...");
 					List<AlgorithmicTrade> tradeList = new ArrayList<AlgorithmicTrade>();
 					tradeList.addAll(orderbook.runStrategy(strat, volume));
