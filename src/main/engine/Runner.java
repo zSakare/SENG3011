@@ -43,23 +43,24 @@ public class Runner {
 				System.out.println("quit - Quits the application");
 				command = keyIn.next();
 				if (command.equals(PICK_STRATEGY)) {
-					System.out.println("Please Choose a strategy");
-					System.out.println("Current available strategies: ");
-					System.out.println("'R' - Random");
-					System.out.println("'M' - Momentum");
-					System.out.println("'MR' - Mean Revision");
-					strategy = keyIn.next();
-					if (("R").equals(strategy)) {
-						strat = Strategy.RANDOM;
-					} else if (("M").equals(strategy)) {
-						strat = Strategy.MOMENTUM;
-					} else if (("MR").equals(strategy)) {
-						strat = Strategy.MEAN_REVISION;
-					} else {
-						System.err.println("Please input a correct strategy");
-						strategy = "";
+					while (strategy.isEmpty()) {
+						System.out.println("Please Choose a strategy");
+						System.out.println("Current available strategies: ");
+						System.out.println("'R' - Random");
+						System.out.println("'M' - Momentum");
+						System.out.println("'MR' - Mean Revision");
+						strategy = keyIn.next();
+						if (("R").equals(strategy)) {
+							strat = Strategy.RANDOM;
+						} else if (("M").equals(strategy)) {
+							strat = Strategy.MOMENTUM;
+						} else if (("MR").equals(strategy)) {
+							strat = Strategy.MEAN_REVISION;
+						} else {
+							System.err.println("Please input a correct strategy");
+							strategy = "";
+						}
 					}
-	
 					System.out.println("Please Enter quantity to trade");
 					String volume = keyIn.next();
 					System.out.println("Simulating...");
