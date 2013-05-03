@@ -2,3 +2,4 @@
 .settings/
 *.synctex.gz
 .metadata/
+*.class

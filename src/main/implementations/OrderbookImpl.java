@@ -83,9 +83,11 @@ public class OrderbookImpl implements Orderbook {
 		String buyerBrokerId = RANDOM_BROKER_ID;
 		String bidOrAsk = ORDER_BID;
 		
+		// Find the lowest price just before the newly generated time.
 		double lowest = askList.get(FIRST_ELEMENT).getPrice();
 		for (Order ask : askList) {
-			if (date.before(ask.getDateTime())) { 
+			// Check if the our date is after the ask list dates.
+			if (date.after(ask.getDateTime())) { 
 				if (lowest < ask.getPrice()) { 
 					lowest = ask.getPrice();
 				}
@@ -119,9 +121,11 @@ public class OrderbookImpl implements Orderbook {
 		String sellerBrokerId = RANDOM_BROKER_ID;
 		String bidOrAsk = ORDER_ASK;
 		
+		// Find the highest price just before the newly generated time.
 		double highest = bidList.get(FIRST_ELEMENT).getPrice();
 		for (Order bid : bidList) {
-			if (date.before(bid.getDateTime())) { 
+			// Check if our dates are after the bid list dates.
+			if (date.after(bid.getDateTime())) { 
 				if (highest > bid.getPrice()) { 
 					highest = bid.getPrice();
 				}
