@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 
+import main.utils.Strategy;
+
 
 public class Runner_gui {
 
@@ -118,6 +120,8 @@ public class Runner_gui {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO: Exit handler
+			    System.exit(0);
+
 			}
 		});
 		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
@@ -133,6 +137,7 @@ public class Runner_gui {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO: Link to strategy executor
+				
 			}
 		});
 		GridBagConstraints gbc_btnExecuteStrategy = new GridBagConstraints();
