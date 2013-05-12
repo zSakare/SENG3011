@@ -311,7 +311,6 @@ public class OrderbookImpl implements Orderbook {
 			
 			// Calculate the current moving average.
 			double movingAverage = tradeReturn/LOOK_BACK_N;
-			System.out.println("Trade return total: " + tradeReturn + " Average: " + movingAverage);
 			// Check if the moving average breaks the threshold.
 			if (movingAverage >= THRESHOLD) {
 				// Average broke positive threshold, indicates we should buy (stock getting better)
