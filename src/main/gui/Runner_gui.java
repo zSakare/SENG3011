@@ -1,35 +1,23 @@
-package main.gui.view;
+package main.gui;
 
 import java.awt.EventQueue;
-import java.awt.GridBagConstraints;
+import javax.swing.JFrame;
+import javax.swing.JButton;
 import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.ItemSelectable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JTextPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 
-import main.gui.controller.Controller;
+import main.utils.Strategy;
 
 
-public class RunnerGUI {
+public class Runner_gui {
 
-	private Controller controller;
 	private JFrame frame;
 
 	/**
@@ -39,7 +27,7 @@ public class RunnerGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RunnerGUI window = new RunnerGUI();
+					Runner_gui window = new Runner_gui();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,15 +39,10 @@ public class RunnerGUI {
 	/**
 	 * Create the application.
 	 */
-	public RunnerGUI() {
-		controller = new Controller();
+	public Runner_gui() {
 		initialize();
 	}
 
-	static private String selectedString(ItemSelectable is) {
-	    Object selected[] = is.getSelectedObjects();
-	    return ((selected.length == 0) ? "null" : (String)selected[0]);
-	  } 
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -76,8 +59,6 @@ public class RunnerGUI {
 		
 		JTextPane txtpnOutput = new JTextPane();
 		txtpnOutput.setEditable(false);
-		redirectSystemStreams(txtpnOutput);
-		
 		GridBagConstraints gbc_txtpnOutput = new GridBagConstraints();
 		gbc_txtpnOutput.gridwidth = 3;
 		gbc_txtpnOutput.insets = new Insets(0, 0, 5, 0);
@@ -97,8 +78,7 @@ public class RunnerGUI {
 		btnLoadInputFile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. E.g. sircaInput.csv.", "Choose a File", JOptionPane.QUESTION_MESSAGE);
-				controller.setOrderbook(fileName);
+				// TODO: input file locator
 			}
 		});
 		GridBagConstraints gbc_btnLoadInputFile = new GridBagConstraints();
@@ -113,17 +93,6 @@ public class RunnerGUI {
 		comboBox.setMaximumRowCount(3);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Random", "Momentum", "Mean-Revision"}));
 		comboBox.setToolTipText("Choose Strategy");
-        ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                ItemSelectable is = (ItemSelectable)actionEvent.getSource();
-                String strategy = selectedString(is);
-                controller.setStrategy(strategy);
-                String volume = JOptionPane.showInputDialog(null,"Enter a Volume to trade.", "Volume", JOptionPane.QUESTION_MESSAGE);
-                controller.setVolume(volume);
-            }
-        };   
-        comboBox.addActionListener(actionListener);
-
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -131,13 +100,11 @@ public class RunnerGUI {
 		gbc_comboBox.gridy = 2;
 		frame.getContentPane().add(comboBox, gbc_comboBox);
 		
-		
-		
 		JButton btnPerformanceReport = new JButton("Performance Report");
 		btnPerformanceReport.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controller.evaluate();
+				// TODO: Link to performance report generator
 			}
 		});
 		GridBagConstraints gbc_btnPerformanceReport = new GridBagConstraints();
@@ -170,8 +137,9 @@ public class RunnerGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO: Link to strategy executor
-				controller.runStrategy();
-				
+				openButton = new JButton("Open a File...",
+                //createImageIcon("images/Open16.gif"));
+                openButton.addActionListener(this);
 			}
 		});
 		GridBagConstraints gbc_btnExecuteStrategy = new GridBagConstraints();
@@ -181,42 +149,19 @@ public class RunnerGUI {
 		gbc_btnExecuteStrategy.gridx = 1;
 		gbc_btnExecuteStrategy.gridy = 3;
 		frame.getContentPane().add(btnExecuteStrategy, gbc_btnExecuteStrategy);
+		
+		JButton btnSaveLog = new JButton("Save Log");
+		btnSaveLog.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO: Save output log to file
+			}
+		});
+		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
+		gbc_btnSaveLog.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSaveLog.gridx = 2;
+		gbc_btnSaveLog.gridy = 3;
+		frame.getContentPane().add(btnSaveLog, gbc_btnSaveLog);
 	}
-	
-	private void updateTextPane(final String text, final JTextPane pane) {
-		  SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		      Document doc = pane.getDocument();
-		      try {
-		        doc.insertString(doc.getLength(), text, null);
-		      } catch (BadLocationException e) {
-		        throw new RuntimeException(e);
-		      }
-		      pane.setCaretPosition(doc.getLength() - 1);
-		    }
-		  });
-		}
-		 
-		private void redirectSystemStreams(final JTextPane pane) {
-		  OutputStream out = new OutputStream() {
-		    @Override
-		    public void write(final int b) throws IOException {
-		      updateTextPane(String.valueOf((char) b), pane);
-		    }
-		 
-		    @Override
-		    public void write(byte[] b, int off, int len) throws IOException {
-		      updateTextPane(new String(b, off, len), pane);
-		    }
-		 
-		    @Override
-		    public void write(byte[] b) throws IOException {
-		      write(b, 0, b.length);
-		    }
-		  };
-		 
-		  System.setOut(new PrintStream(out, true));
-		  System.setErr(new PrintStream(out, true));
-		}
 }
 
