@@ -1,24 +1,20 @@
 package test.implementations;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
-
-import java.util.Date;
-import java.util.List;
-
-import main.implementations.OrderBuilderImpl;
 import main.implementations.OrderbookImpl;
 import main.implementations.order.AlgorithmicTrade;
 import main.implementations.order.Order;
-import main.interfaces.OrderBuilder;
 import main.utils.Strategy;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import test.helper.ListGenerator;
+
 public class OrderbookImplTest {
 	
+<<<<<<< HEAD
 	// 6 different lists for the 3 different types of trade strategies.
 	private List<Order> randomBidList;
 	private List<Order> randomAskList;
@@ -45,235 +41,17 @@ public class OrderbookImplTest {
 	private static final int MAX_ORDERS = 1000;
 	
 	
+=======
+>>>>>>> e4592d125a6d0f11fc52860d433138fd812ffa70
 	// function to create orders for price volume and time
 	public OrderbookImplTest () { 
 		
 		
 	}
 	
-	public void randomBidListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_BID,
-					buyerBrokerID);
-			Order newOrder = orderBuilder.build();
-			randomBidList.add(newOrder);
-			price += 0.5;
-			randTime += 5000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void bidMomentumListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_ASK,
-					sellerBrokerID);
-			Order newOrder = orderBuilder.build();
-			bidMomentumList.add(newOrder);
-			price += 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void bidMeanRevListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_ASK,
-					sellerBrokerID);
-			Order newOrder = orderBuilder.build();
-			bidMeanRevList.add(newOrder);
-			price -= 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void randomAskListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_ASK,
-					sellerBrokerID);
-			Order newOrder = orderBuilder.build();
-			randomAskList.add(newOrder);
-			price -= 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void askMomentunListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_ASK,
-					sellerBrokerID);
-			Order newOrder = orderBuilder.build();
-			askMomentumList.add(newOrder);
-			price -= 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void askMeanRevListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					ORDER_ASK,
-					sellerBrokerID);
-			Order newOrder = orderBuilder.build();
-			askMeanRevList.add(newOrder);
-			price += 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void posMomentumTradeListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					brokerID);
-			Order newOrder = orderBuilder.build();
-			momentumTradeList.add(newOrder);
-			price += 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void negMomentumTradeListCreator () { 
-		
-		momentumTradeList.clear();
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					brokerID);
-			Order newOrder = orderBuilder.build();
-			momentumTradeList.add(newOrder);
-			price -= 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void posMeanRevTradeListCreator () { 
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					brokerID);
-			Order newOrder = orderBuilder.build();
-			meanRevTradeList.add(newOrder);
-			price -= 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
-	public void negMeanRevTradeListCreator () { 
-		
-		momentumTradeList.clear();
-		
-		int numTimes = 0;
-		Long randTime = date.getTime();
-		
-		while (numTimes < MAX_ORDERS) { 
-			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-					date,
-					price,
-					volume,
-					brokerID);
-			Order newOrder = orderBuilder.build();
-			momentumTradeList.add(newOrder);
-			price += 0.4;
-			randTime += 4000;
-			date.setTime(randTime);
-			volume += 20;
-			numTimes++;
-		}
-	}
-	
 	public void printList () { 
 		
-		for (Order order : randomBidList) {
+		for (Order order : ListGenerator.generateRandomBidList()) {
 			System.out.println("price: " + order.getPrice());
 		}
 		
@@ -302,8 +80,8 @@ public class OrderbookImplTest {
 		
 		System.out.println("Testing Random Strategy...");
 		
-		OrderbookImpl randomOrderBook = new OrderbookImpl(randomBidList, 
-				randomAskList, 
+		OrderbookImpl randomOrderBook = new OrderbookImpl(ListGenerator.generateRandomBidList(), 
+				ListGenerator.generateRandomAskList(),
 				null);
 		Strategy strategy = Strategy.RANDOM;
 		String randVolume = "999";
