@@ -1,5 +1,6 @@
 package test.evaluator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import main.evaluator.TradeStrategyEvaluator;
@@ -9,6 +10,8 @@ import main.implementations.order.Order;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import test.helper.ListGenerator;
 
 public class TradeStrategyEvaluatorTest {
 
@@ -25,11 +28,24 @@ public class TradeStrategyEvaluatorTest {
 	@Test
 	public void testCalculateProfitLoss() {
 		System.out.println("Testing if profit calculation is correct.");
-		TradeStrategyEvaluator evaluator = new TradeStrategyEvaluator(testTradeList());
+		TradeStrategyEvaluator evaluator = new TradeStrategyEvaluator(
+				testTradeList(ListGenerator.generateRandomAskList(), 
+						ListGenerator.generateRandomBidList()));
+		
+		
+		
 	}
 
 	private List<AlgorithmicTrade> testTradeList(List<Order> bidList, List<Order> askList) {
-		List<AlgorithmicTrade> tradeList = null;
+		List<AlgorithmicTrade> tradeList = new ArrayList<AlgorithmicTrade>();
+		
+		for (Order bid : bidList) {
+			for (Order ask : askList) {
+				if (ask.getPrice() == bid.getPrice()) {
+					tradeList.add(new AlgorithmicTrade(bid, ask));
+				}
+			}
+		}
 		
 		return tradeList;
 	}

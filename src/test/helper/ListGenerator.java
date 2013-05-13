@@ -10,12 +10,12 @@ import main.interfaces.OrderBuilder;
 
 public class ListGenerator {
 
-	private static String instrument = "DEF";
-	private static Date date;
-	private static double price; 
-	private static String volume;
-	private static String ORDER_BID = "B";
-	private static String ORDER_ASK = "A";
+	private static final String INSTRUMENT = "DEF";
+	private static final Date DATE = new Date();
+	private static final double PRICE = 100.0; 
+	private static final String VOLUME = "50";
+	private static final String ORDER_BID = "B";
+	private static final String ORDER_ASK = "A";
 	
 	private static final String RANDOM_BROKER_ID = "6969";
 	private static final String buyerBrokerID = RANDOM_BROKER_ID;
@@ -29,7 +29,11 @@ public class ListGenerator {
 		List<Order> randomBidList = new ArrayList<Order>();
 		
 		int numTimes = 0;
-		Long randTime = date.getTime();
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
+		long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
 			OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -43,7 +47,6 @@ public class ListGenerator {
 			price += 0.5;
 			randTime += 5000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -55,6 +58,10 @@ public class ListGenerator {
 		List<Order> bidMomentumList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -69,7 +76,6 @@ public class ListGenerator {
 			price += 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -81,6 +87,10 @@ public class ListGenerator {
 		List<Order> bidMeanRevList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -95,7 +105,6 @@ public class ListGenerator {
 			price -= 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -107,6 +116,10 @@ public class ListGenerator {
 		List<Order> randomAskList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -121,7 +134,6 @@ public class ListGenerator {
 			price -= 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -133,6 +145,10 @@ public class ListGenerator {
 		List<Order> askMomentumList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -147,7 +163,6 @@ public class ListGenerator {
 			price -= 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -159,6 +174,10 @@ public class ListGenerator {
 		List<Order> askMeanRevList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -173,7 +192,6 @@ public class ListGenerator {
 			price += 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -185,6 +203,10 @@ public class ListGenerator {
 		List<Order> momentumTradeList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -198,7 +220,6 @@ public class ListGenerator {
 			price += 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -210,6 +231,10 @@ public class ListGenerator {
 		List<Order> momentumTradeList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -223,7 +248,6 @@ public class ListGenerator {
 			price -= 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -235,6 +259,10 @@ public class ListGenerator {
 		List<Order> meanRevTradeList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -248,7 +276,6 @@ public class ListGenerator {
 			price -= 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		
@@ -260,6 +287,10 @@ public class ListGenerator {
 		List<Order> momentumTradeList = new ArrayList<Order>();
 		
 		int numTimes = 0;
+		String instrument = INSTRUMENT;
+		Date date = DATE;
+		double price = PRICE;
+		String volume = VOLUME;
 		Long randTime = date.getTime();
 		
 		while (numTimes < MAX_ORDERS) { 
@@ -273,7 +304,6 @@ public class ListGenerator {
 			price += 0.4;
 			randTime += 4000;
 			date.setTime(randTime);
-			volume += 20;
 			numTimes++;
 		}
 		

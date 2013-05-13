@@ -43,6 +43,7 @@ public class OrderBuilderImpl implements OrderBuilder {
 			setSellerBrokerId(brokerId);
 			setBuyerBrokerId(DEFAULT_BUYER_BROKER_ID);
 		}
+		setDateTime(date);
 		setPrice(price);
 		setVolume(volume);
 		setValue(this.price*this.volume);
@@ -87,7 +88,7 @@ public class OrderBuilderImpl implements OrderBuilder {
 	
 	public OrderBuilderImpl (String security, Date date, double price, String volume,
 				String brokerID) {
-		
+		// TODO: MIKE FIX THE CONSTRUCTOR YOU DICK.
 	}
 	
 	public Order build() {

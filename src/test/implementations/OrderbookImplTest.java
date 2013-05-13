@@ -1,9 +1,7 @@
 package test.implementations;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
 import java.util.List;
 
 import main.implementations.OrderbookImpl;
