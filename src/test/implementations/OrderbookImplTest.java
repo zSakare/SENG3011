@@ -1,6 +1,11 @@
 package test.implementations;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
+
+import java.util.Date;
+import java.util.List;
+
 import main.implementations.OrderbookImpl;
 import main.implementations.order.AlgorithmicTrade;
 import main.implementations.order.Order;
@@ -13,41 +18,6 @@ import org.junit.Test;
 import test.helper.ListGenerator;
 
 public class OrderbookImplTest {
-	
-<<<<<<< HEAD
-	// 6 different lists for the 3 different types of trade strategies.
-	private List<Order> randomBidList;
-	private List<Order> randomAskList;
-	private List<Order> bidMomentumList;
-	private List<Order> askMomentumList;
-	private List<Order> bidMeanRevList;
-	private List<Order> askMeanRevList;
-	
-	private List<Order> momentumTradeList;
-	private List<Order> meanRevTradeList;
-	
-	private static String instrument = "DEF";
-	private static Date date;
-	private static double price = 150.00; 
-	private static String volume;
-	private static String ORDER_BID = "B";
-	private static String ORDER_ASK = "A";
-	
-	private static final String RANDOM_BROKER_ID = "6969";
-	private static final String buyerBrokerID = RANDOM_BROKER_ID;
-	private static final String sellerBrokerID = RANDOM_BROKER_ID;
-	private static final String brokerID = RANDOM_BROKER_ID;
-	
-	private static final int MAX_ORDERS = 1000;
-	
-	
-=======
->>>>>>> e4592d125a6d0f11fc52860d433138fd812ffa70
-	// function to create orders for price volume and time
-	public OrderbookImplTest () { 
-		
-		
-	}
 	
 	public void printList () { 
 		
@@ -112,8 +82,9 @@ public class OrderbookImplTest {
 		
 		System.out.println("Testing Positive Momentum Strategy...");
 		
-		OrderbookImpl momentumOrderbook = new OrderbookImpl (bidMomentumList, 
-				askMomentumList, momentumTradeList);
+		OrderbookImpl momentumOrderbook = new OrderbookImpl (ListGenerator.generateMomentumBidList(), 
+				ListGenerator.generateAskMomentumList(), 
+				ListGenerator.generatePositiveMomentumTradeList());
 		Strategy strategy = Strategy.MOMENTUM;
 		String randVolume = "999";
 		
@@ -140,8 +111,9 @@ public class OrderbookImplTest {
 		
 		System.out.println("Testing Negative Momentum Strategy...");
 		
-		OrderbookImpl momentumOrderbook = new OrderbookImpl (bidMomentumList, 
-				askMomentumList, momentumTradeList);
+		OrderbookImpl momentumOrderbook = new OrderbookImpl (ListGenerator.generateMomentumBidList(), 
+				ListGenerator.generateAskMomentumList(), 
+				ListGenerator.generateNegativeMomentumTradeList());
 		Strategy strategy = Strategy.MOMENTUM;
 		String randVolume = "999";
 		
@@ -168,8 +140,9 @@ public class OrderbookImplTest {
 		
 		System.out.println("Testing Positive Mean Revision Strategy...");
 		
-		OrderbookImpl meanRevOrderbook = new OrderbookImpl (bidMeanRevList, 
-				askMeanRevList, meanRevTradeList);
+		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
+				ListGenerator.generateMeanRevAskList(), 
+				ListGenerator.generatePositiveMeanRevTradeList());
 		Strategy strategy = Strategy.MEAN_REVISION;
 		String randVolume = "999";
 		
@@ -196,8 +169,9 @@ public class OrderbookImplTest {
 		
 		System.out.println("Testing Negative Mean Revision Strategy...");
 		
-		OrderbookImpl meanRevOrderbook = new OrderbookImpl (bidMeanRevList, 
-				askMeanRevList, meanRevTradeList);
+		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
+				ListGenerator.generateMeanRevAskList(), 
+				ListGenerator.generateNegativeMeanRevTradeList());
 		Strategy strategy = Strategy.MEAN_REVISION;
 		String randVolume = "999";
 		
