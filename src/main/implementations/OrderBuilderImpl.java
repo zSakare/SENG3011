@@ -85,6 +85,11 @@ public class OrderBuilderImpl implements OrderBuilder {
 		setValue(this.price*this.volume);
 	}
 	
+	public OrderBuilderImpl (String security, Date date, double price, String volume,
+				String brokerID) {
+		
+	}
+	
 	public Order build() {
 		return new Order(security, 
 							dateTime, 
