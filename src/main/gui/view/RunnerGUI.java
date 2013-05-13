@@ -19,11 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-
 import main.gui.controller.Controller;
 
 
@@ -37,6 +35,7 @@ public class RunnerGUI {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					RunnerGUI window = new RunnerGUI();
@@ -54,6 +53,7 @@ public class RunnerGUI {
 	public RunnerGUI() {
 		controller = new Controller();
 		initialize();
+		System.out.println("Welcome to ASX Strategy Evaluator");
 	}
 
 	static private String selectedString(ItemSelectable is) {
@@ -74,17 +74,19 @@ public class RunnerGUI {
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
-		JTextPane txtpnOutput = new JTextPane();
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 0;
+		frame.getContentPane().add(scrollPane, gbc_scrollPane);
+		
+		JTextArea txtpnOutput = new JTextArea();
+		scrollPane.setViewportView(txtpnOutput);
 		txtpnOutput.setEditable(false);
 		redirectSystemStreams(txtpnOutput);
-		
-		GridBagConstraints gbc_txtpnOutput = new GridBagConstraints();
-		gbc_txtpnOutput.gridwidth = 3;
-		gbc_txtpnOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_txtpnOutput.fill = GridBagConstraints.BOTH;
-		gbc_txtpnOutput.gridx = 0;
-		gbc_txtpnOutput.gridy = 0;
-		frame.getContentPane().add(txtpnOutput, gbc_txtpnOutput);
 		
 		JLabel lblChooseStrategy = new JLabel("Choose Strategy:");
 		GridBagConstraints gbc_lblChooseStrategy = new GridBagConstraints();
@@ -97,6 +99,7 @@ public class RunnerGUI {
 		btnLoadInputFile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+
 				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. E.g. sircaInput.csv.", "Choose a File", JOptionPane.QUESTION_MESSAGE);
 				controller.setOrderbook(fileName);
 			}
@@ -114,7 +117,8 @@ public class RunnerGUI {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Random", "Momentum", "Mean-Revision"}));
 		comboBox.setToolTipText("Choose Strategy");
         ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
+            @Override
+			public void actionPerformed(ActionEvent actionEvent) {
                 ItemSelectable is = (ItemSelectable)actionEvent.getSource();
                 String strategy = selectedString(is);
                 controller.setStrategy(strategy);
@@ -183,40 +187,35 @@ public class RunnerGUI {
 		frame.getContentPane().add(btnExecuteStrategy, gbc_btnExecuteStrategy);
 	}
 	
-	private void updateTextPane(final String text, final JTextPane pane) {
-		  SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		      Document doc = pane.getDocument();
-		      try {
-		        doc.insertString(doc.getLength(), text, null);
-		      } catch (BadLocationException e) {
-		        throw new RuntimeException(e);
-		      }
-		      pane.setCaretPosition(doc.getLength() - 1);
-		    }
-		  });
-		}
-		 
-		private void redirectSystemStreams(final JTextPane pane) {
-		  OutputStream out = new OutputStream() {
-		    @Override
-		    public void write(final int b) throws IOException {
-		      updateTextPane(String.valueOf((char) b), pane);
-		    }
-		 
-		    @Override
-		    public void write(byte[] b, int off, int len) throws IOException {
-		      updateTextPane(new String(b, off, len), pane);
-		    }
-		 
-		    @Override
-		    public void write(byte[] b) throws IOException {
-		      write(b, 0, b.length);
-		    }
-		  };
-		 
-		  System.setOut(new PrintStream(out, true));
-		  System.setErr(new PrintStream(out, true));
-		}
+	private void updateTextArea(final String text, final JTextArea textArea) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				textArea.append(text);
+			}
+		});
+	}
+
+	private void redirectSystemStreams(final JTextArea textArea) {
+		OutputStream out = new OutputStream() {
+			@Override
+			public void write(int b) throws IOException {
+				updateTextArea(String.valueOf((char) b), textArea);
+			}
+
+			@Override
+			public void write(byte[] b, int off, int len) throws IOException {
+				updateTextArea(new String(b, off, len), textArea);
+			}
+
+			@Override
+			public void write(byte[] b) throws IOException {
+				write(b, 0, b.length);
+			}
+		};
+
+		System.setOut(new PrintStream(out, true));
+		System.setErr(new PrintStream(out, true));
+	}
 }
 
