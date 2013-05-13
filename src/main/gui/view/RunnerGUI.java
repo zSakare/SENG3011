@@ -1,23 +1,26 @@
-package main.gui;
+package main.gui.view;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JTextPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JComboBox;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
-import main.utils.Strategy;
+import main.gui.controller.Controller;
 
 
-public class Runner_gui {
+public class RunnerGUI {
 
+	private Controller controller;
 	private JFrame frame;
 
 	/**
@@ -27,7 +30,7 @@ public class Runner_gui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Runner_gui window = new Runner_gui();
+					RunnerGUI window = new RunnerGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +42,8 @@ public class Runner_gui {
 	/**
 	 * Create the application.
 	 */
-	public Runner_gui() {
+	public RunnerGUI() {
+		controller = new Controller();
 		initialize();
 	}
 
@@ -78,7 +82,8 @@ public class Runner_gui {
 		btnLoadInputFile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO: input file locator
+				String fileName = JOptionPane.showInputDialog(null, "Please enter a valid filename. E.g. sircaInput.csv.", "Choose a File", JOptionPane.QUESTION_MESSAGE);
+				controller.setOrderbook(fileName);
 			}
 		});
 		GridBagConstraints gbc_btnLoadInputFile = new GridBagConstraints();
