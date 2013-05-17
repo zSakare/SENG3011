@@ -36,7 +36,7 @@ public class OrderBuilderImpl implements OrderBuilder {
 
 		setSecurity(security);
 		setBid(isBid);
-		if (this.isBid) {
+		if (("B").equals(isBid)) {
 			setBuyerBrokerId(brokerId);
 			setSellerBrokerId(DEFAULT_SELLER_BROKER_ID);
 		} else {
