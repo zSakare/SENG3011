@@ -1,0 +1,211 @@
+%%
+%%	Testing Document Report
+%%	Created by Group02
+%%
+%%	2:11am 16/05/2013 
+%%
+%%	Use for SENG3011
+%%
+
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage[normalem]{ulem} 
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{float}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%TITLE PAGE
+\thispagestyle{empty}
+\begin {center}
+\Large\textbf{SENG3011} 
+
+\Large\textbf{Testing Documentation}
+
+\bigskip\Large\textbf{Group Number: 02}
+
+\end{center}
+
+\vspace*{16.5cm}
+\begin{tabular}{|l|l|}
+  \hline
+  Version         & 1.0\\\hline
+  Print Date      & 16/05/2013 2:11am\\\hline
+  Release Date    & 16/05/2013\\\hline
+  Release State   & Final \\\hline
+  Approval State  & Pending \\\hline
+  Approved by     & Group02 \\\hline
+  Prepared by     & Group02 \\\hline
+  Reviewed by     & Group02 \\\hline
+  Confidentiality Category  & Confidential\\\hline
+\end{tabular}
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%REVISION CONTROL
+
+\thispagestyle{plain}     % Turn on page numbering
+\setcounter{page}{1}      % set page number counter
+\renewcommand{\thepage}{\roman{page}}  % set page number to roman
+
+\noindent{\Large\textbf{Document Revision Control}}\\[2ex]
+\begin{tabular}{|l|l|l|l|}
+  \hline
+  Version & Date & Authors & Summary of Changes\\\hline\hline
+	v1.0 & 16/05/2013 & Group02 & Added in Introduction           	\\\hline
+	v1.1 & 16/05/2013 & Group02 & Added in Architectural  		\\\hline
+	v1.2 & 16/05/2013 & Group02 & Added in Testing Environment	\\\hline
+	v1.3 & 16/05/2013 & Group02 & Added in Overview of Test Data		\\\hline
+	v1.3 & 16/05/2013 & Group02 & Added in Illustration of Testing		\\\hline
+
+\end{tabular}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%TABLE OF CONTENTS
+
+\tableofcontents
+\pagebreak
+     %% delete if not required
+\pagebreak         %% delete if there is no list of figures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%MAIN
+\setcounter{page}{1}     % Set page number counter
+\renewcommand{\thepage}{\arabic{page}}  % print page number as arabic
+
+\section {Introduction} 
+
+This report is designed to discuss the testing which we developed and used alongside our system. \\
+\\ 
+Most tests were designed while we created our system. Other tests were created when we completed specific
+milestones. \\ 
+
+\section {Architecture}
+This section discusses our current Architecture of the system and which parts of it are being tested. We 
+have also included whether or not the tests were functional or non functional.  \\
+
+The Trade Signal generator has been tested in a number of ways. Functional testing of the trade signal generator was ran with input files and checked if the output was the one we expected from our calculations. A number of a unit testing occurred on the trade signal generator which all passed. There was also non-functional testing performed on the trade signal generator attempting to speed the generator up. \\
+
+The Trade Engine functional testing occurred in which the input was given and the output was compared to what we expected it to provide. In this all the output matched we expected to occurred. The Engine was also unit tested which passed all the unit testing. \\
+ 
+The trade Strategy Evaluator was functional tested in which in which we gave the evaluator input and the output was compared to what we expected the output to be, in which it matched. The strategy evaluator was also unit tested in which the test results matched with what we expected.  \\
+
+Console UI was tested non-functional and in the manual testing. We would pass the Console UI to a team member who didn’t code the Console UI to see if he can follow it. He was able to follow it easily hence we were able to test UI. \\ 
+
+Graphical UI was tested by showing a non-team member our UI and seeing if he could understand out UI. He was able to use the UI and see what to do where and how. This is how we tested that our graphical UI was easy to follow for a non-team member. \\
+
+\indent	- Trade Signal Generator: Functional testing, unit testing, non-functional testing  (attempting \\ 
+\indent\indent to speed up) \\ 
+\indent	- Trade Engine: Functional testing, unit testing. \\
+\indent	- Trade Strategy Evaluator: Functional testing, unit testing. \\ 
+\indent	- Console UI: Non-functional testing, manual testing. \\ 
+\indent	- Graphical UI: Non-functional testing, manual testing. \\
+
+
+\section {Testing Environment}
+This section contains the description of our testing environment. We have used JUnit testing and  \\ 
+user testing . \\ 
+
+\indent	\underline{- JUnit test suite:} 	\\ 
+\indent\indent 	We use the built in JUnit testing suite found inside eclipse to test individual parts of our 
+\indent\indent code. We wrote these test cases as we developed our system to make sure our system was \indent\indent performing as we expected it to. \\ 
+\indent	\underline{- User testing:} 		\\ 
+\indent\indent   User testing was required during the creation of our GUI and our system, which occurred 
+\indent\indent during the addition of new parts. User testing also helps verify with live test data that our 
+\indent\indent system is adhering to the requirements provided. \\ 
+\indent 	\underline{- We do not test external libraries (CSV Parser): } \\ 
+\indent \indent 	This has not been tested, however we have seen that it correctly parses in the information \indent\indent during the initial creation of our program and during the development process. We also do \\
+\indent\indent not explicitly test external libraries as we trust that it is a complete and well-developed \\
+\indent\indent product.  \\ 
+\indent 	\underline{- We do not programmatically test GUI or UI:} \\ 
+\indent \indent 	We only test our GUI and UI via user testing and in no such way do we test it \\ 
+\indent\indent  programmatically. This is a limitation in our testing environment where we cannot test this. \\
+
+
+\section {Overview of Test Data} 
+We provide an overview of our test data in this section to provide some clarity to the users of our system. \\
+
+\indent	\underline {- We have test cases for each part of our program:} \\
+\indent\indent		\underline{ - Trade strategy evaluator: } \\
+\indent\indent\indent			- Tests if the evaluator reads in a trade list correctly. \\ 
+\indent\indent\indent			- Tests if profit breaks even. \\ 
+\indent\indent\indent			- Tests if profit calculation is correct with 1 buy and 2 sells. \\
+\indent\indent\indent			- Tests if profit calculation is correct with 2 buy and 1 sells. \\
+\indent\indent		\underline{- Order book implementation:} \\ 
+\indent\indent\indent			- Tests the Random Strategy by checking if the volume for the generated Bids and Asks \\
+\indent\indent\indent\indent	 orders are the same. It also checks whether list provided after running the \\\indent\indent\indent\indent strategy is not empty. \\
+\indent\indent\indent			- Tests the Momentum Strategy for a positive trend. It also checks whether list \indent\indent\indent	\indent provided \\
+\indent\indent\indent\indent after running the strategy is not empty. We also check to make sure that a Bid has \\
+\indent\indent\indent\indent been created to match the positive trend. \\ 
+\indent\indent\indent			- Tests the Momentum Strategy for a Negative trend. It also checks whether list \\ \indent\indent\indent\indent provided after running the strategy is not empty. We also check to make sure that 
+\indent\indent\indent\indent an Ask has been created to match the Negative trend. \\
+\indent\indent\indent			- Tests the Mean Revision Strategy for a Positive trend. It also checks whether list 
+\indent\indent\indent\indent provided after running the strategy is not empty. We also check to make sure that \indent\indent\indent\indent an Ask has been created to match the positive trend. \\ 
+\indent\indent\indent			- Tests the Mean Revision Strategy for a Negative trend. It also checks whether list \\ 
+\indent\indent\indent\indent provided after running the strategy is not empty. We also check to make sure that \\
+\indent\indent\indent\indent a Bid has been created to match the negative trend. \\
+\indent\indent		\underline{- Algorithmic trades:} \\ 
+\indent\indent\indent			- Test the algorithmic trader with a lower ask volume than buy volume and see if it still \\ 
+\indent\indent\indent\indent	 works. \\
+\indent\indent\indent			- Test the algorithmic trader with a lower buy volume than ask volume and see if it still \\ 
+\indent\indent\indent\indent works. \\ 
+\indent\indent\indent			- Test the algorithmic trader with the exact same buy and ask volumes and see if it still \\
+\indent\indent\indent\indent  works. \\ 
+\indent\indent		\underline{- UI and GUI Testing: }\\
+\indent\indent\indent			- Run with the initial SIRCA input provided. \\ 
+\indent\indent\indent			- Run with Random Strategy, check one bid and one ask is generated. \\
+\indent\indent\indent			- Run with Momentum Strategy, check bid and ask orders are generated. \\ 
+\indent\indent\indent			- Run with Mean Reversion Strategy, check bid and ask orders are generated. \\
+\indent\indent\indent			- Attempt to quit via button. \\
+\indent\indent\indent			- Check performance reports are correct. \\ 
+\indent\indent\indent			- Attempt to load new SIRCA data. \\ 
+\indent\indent\indent			- Repeat. \\ 
+
+
+\section {Illustration of Testing}
+
+Whenever a new feature is added to the system, unit tests are written soon after to make sure the feature operates correctly according to our requirements documents. Following writing unit tests for the feature that is just written, all tests must be run on top of that to ensure no other features are broken. We use JUnit for Eclipse to make this process much faster, a simple run button and a graphical display instantly tells us which tests pass and fail. \\ 
+
+After all programmatic testing is passed, at least one of the two available interfaces must be run to ensure that the feature works functionally. We run it with live data (actual SIRCA data) and run whichever feature and check if it outputs what we expect given specific inputs. This form of manual testing takes a lot more time compared to automated unit tests. To ensure functional sanity, we get someone else (anyone but the person who wrote the code) to confirm that the feature recently written is both descriptive, accurate and informative for the user. \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end {document}
+
+
