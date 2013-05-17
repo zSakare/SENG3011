@@ -245,7 +245,7 @@ public class OrderbookImpl implements Orderbook {
 			double tradeReturn = 0.0;
 			Order finalTrade = null;
 			int shiftAcross = j*LOOK_BACK_N;
-			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross; i++) {
+			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross && i < tradeList.size()-1; i++) {
 				Order previousTrade = tradeList.get(i); 
 				Order tradeToCompare = tradeList.get(i+1);
 				double calculatedReturn = ((tradeToCompare.getPrice() - previousTrade.getPrice())/previousTrade.getPrice());
@@ -301,7 +301,7 @@ public class OrderbookImpl implements Orderbook {
 			double tradeReturn = 0.0;
 			Order finalTrade = null;
 			int shiftAcross = j*LOOK_BACK_N;
-			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross; i++) {
+			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross && i < tradeList.size()-1; i++) {
 				Order previousTrade = tradeList.get(i); 
 				Order tradeToCompare = tradeList.get(i+1);
 				double calculatedReturn = ((tradeToCompare.getPrice() - previousTrade.getPrice())/previousTrade.getPrice());
