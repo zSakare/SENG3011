@@ -46,7 +46,7 @@ public class OrderbookImplTest {
 	@Test
 	public void testRunRandomStrategy() {
 		
-		System.out.println("Testing Random Strategy...");
+		System.out.print("Testing Random Strategy.....");
 		
 		OrderbookImpl randomOrderBook = new OrderbookImpl(ListGenerator.generateRandomBidList(), 
 				ListGenerator.generateRandomAskList(),
@@ -65,7 +65,7 @@ public class OrderbookImplTest {
 				assert (algorithmicTrade.getAskOrder().getVolume() == 999);
 			}
 		}
-		System.out.println("Random Strategy Test Passed.");
+		System.out.println("Test Passed");
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class OrderbookImplTest {
 	@Test
 	public void testPosMomentumStrategy() {
 		
-		System.out.println("Testing Positive Momentum Strategy...");
+		System.out.print("Testing Positive Momentum Strategy.....");
 		
 		OrderbookImpl momentumOrderbook = new OrderbookImpl (ListGenerator.generateMomentumBidList(), 
 				ListGenerator.generateAskMomentumList(), 
@@ -94,7 +94,7 @@ public class OrderbookImplTest {
 				assert (algorithmicTrade.getBidOrder().getVolume() == 999);
 			}
 		}
-		System.out.println("Positive Momentum Strategy Test Passed.");
+		System.out.println("Test Passed");
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class OrderbookImplTest {
 	@Test
 	public void testNegMomentumStrategy() {
 		
-		System.out.println("Testing Negative Momentum Strategy...");
+		System.out.print("Testing Negative Momentum Strategy.....");
 		
 		OrderbookImpl momentumOrderbook = new OrderbookImpl (ListGenerator.generateMomentumBidList(), 
 				ListGenerator.generateAskMomentumList(), 
@@ -119,11 +119,11 @@ public class OrderbookImplTest {
 		assertNotNull("Checking MomentumTradeList is not empty...", negMomentumTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : negMomentumTradeList) {
-			if (algorithmicTrade.getAskOrder().getSellerBrokerId() == "6969") { 
-				assert (algorithmicTrade.getAskOrder().getVolume() == 999);
+			if (algorithmicTrade.getBidOrder().getBuyerBrokerId() == "6969") { 
+				assert (algorithmicTrade.getBidOrder().getVolume() == 999);
 			}
 		}
-		System.out.println("Negative Momentum Strategy Test Passed.");
+		System.out.println("Test Passed");
 	}
 	
 	/**
@@ -136,7 +136,7 @@ public class OrderbookImplTest {
 	@Test
 	public void testPosMeanRevStrategy() {
 		
-		System.out.println("Testing Positive Mean Revision Strategy...");
+		System.out.print("Testing Positive Mean Revision Strategy.....");
 		
 		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
 				ListGenerator.generateMeanRevAskList(), 
@@ -152,7 +152,7 @@ public class OrderbookImplTest {
 				assert (algorithmicTrade.getAskOrder().getVolume() == 999);
 			}
 		}
-		System.out.println("Positive Mean Revision Strategy Test Passed.");
+		System.out.println("Test Passed");
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class OrderbookImplTest {
 	@Test
 	public void testNegMeanRevStrategy() {
 		
-		System.out.println("Testing Negative Mean Revision Strategy...");
+		System.out.print("Testing Negative Mean Revision Strategy.....");
 		
 		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
 				ListGenerator.generateMeanRevAskList(), 
@@ -181,7 +181,7 @@ public class OrderbookImplTest {
 				assert (algorithmicTrade.getBidOrder().getVolume() == 999);
 			}
 		}
-		System.out.println("Negative Mean Revision Strategy Test Passed.");
+		System.out.println("Test Passed");
 	}
 
 	@Test

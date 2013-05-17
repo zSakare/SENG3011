@@ -12,12 +12,12 @@ public class ListGenerator {
 
 	private static final String INSTRUMENT = "DEF";
 	private static final Date DATE = new Date();
-	private static final double PRICE = 100.0; 
+	private static final double PRICE = 1000.0; 
 	private static final String VOLUME = "50";
 	private static final String ORDER_BID = "B";
 	private static final String ORDER_ASK = "A";
 	
-	private static final String RANDOM_BROKER_ID = "6969";
+	private static final String RANDOM_BROKER_ID = "123";
 	private static final String buyerBrokerID = RANDOM_BROKER_ID;
 	private static final String sellerBrokerID = RANDOM_BROKER_ID;
 	private static final String brokerID = RANDOM_BROKER_ID;
