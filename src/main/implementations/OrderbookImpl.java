@@ -21,8 +21,8 @@ public class OrderbookImpl implements Orderbook {
 	private static final String ALGORITHMIC_BROKER_ID = "6969";
 	private static final String ORDER_BID = "B";
 	private static final String ORDER_ASK = "A";
-	private static final int LOOK_BACK_N = 1000;
-	private static final double THRESHOLD = 0.00000001; 
+	private static final int DEFAULT_LOOK_BACK_N = 1000;
+	private static final double DEFAULT_THRESHOLD = 0.00000001; 
 	
 	private List<Order> bidList;
 	private List<Order> askList;
@@ -70,16 +70,16 @@ public class OrderbookImpl implements Orderbook {
 		return tradeList;	
 	}
 
-	public List<AlgorithmicTrade> runStrategy(Strategy strategy, String volume) {
+	public List<AlgorithmicTrade> runStrategy(Strategy strategy, String volume, Integer lookBackPeriod, Double threshold) {
 		
 		List<AlgorithmicTrade> tradeList = new ArrayList<AlgorithmicTrade>();
 		if (Strategy.RANDOM == strategy) {
 			tradeList.add(newRandomBid(volume));
 			tradeList.add(newRandomAsk(volume));
 		} else if (Strategy.MOMENTUM == strategy) {
-			tradeList.addAll(newMomentumOrders(volume));
-		} else if (Strategy.MEAN_REVISION == strategy) {
-			tradeList.addAll(newMeanRevisionOrders(volume));
+			tradeList.addAll(newMomentumOrders(volume, lookBackPeriod, threshold));
+		} else if (Strategy.MEAN_REVERSION == strategy) {
+			tradeList.addAll(newMeanReversionOrders(volume, lookBackPeriod, threshold));
 		}
 		
 		return tradeList;
@@ -232,57 +232,65 @@ public class OrderbookImpl implements Orderbook {
 		return lowest;
 	}
 	
-	private List<AlgorithmicTrade> newMomentumOrders(String volume) {
+	private List<AlgorithmicTrade> newMomentumOrders(String volume, Integer lookBackPeriod, Double threshold) {
 		
 		List<AlgorithmicTrade> newTrades = new ArrayList<AlgorithmicTrade>();
 		
 		// Grab all the required order fields
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		
-		int maxIterations = tradeList.size()/LOOK_BACK_N;
+		// If user does not supply anything, use default values.
+		if (lookBackPeriod == null) {
+			lookBackPeriod = DEFAULT_LOOK_BACK_N;
+		}
+		if (threshold == null) {
+			threshold = DEFAULT_THRESHOLD;
+		}
+		
+		int maxIterations = tradeList.size()/lookBackPeriod;
 		boolean paired = false;
 		for (int j = 0; j < maxIterations; j++) {
 			// Look back on N number of trades to work out the momentum of the market.
 			double tradeReturn = 0.0;
 			Order finalTrade = null;
-			int shiftAcross = j*LOOK_BACK_N;
-			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross && i < tradeList.size()-1; i++) {
+			int shiftAcross = j*lookBackPeriod;
+			for (int i = shiftAcross; i < lookBackPeriod+shiftAcross && i < tradeList.size()-1; i++) {
 				Order previousTrade = tradeList.get(i); 
 				Order tradeToCompare = tradeList.get(i+1);
 				double calculatedReturn = ((tradeToCompare.getPrice() - previousTrade.getPrice())/previousTrade.getPrice());
 				tradeReturn += calculatedReturn;
 				finalTrade = tradeToCompare;
-			}
-			
-			// Calculate the current moving average.
-			double movingAverage = tradeReturn/LOOK_BACK_N;
-			// Check if the moving average breaks the threshold.
-			if (movingAverage >= THRESHOLD && !paired) {
-				// Average broke positive threshold, indicates we should buy (stock getting better)
-				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-												finalTrade.getDateTime(),
-												findBidPriceAtTime(finalTrade.getDateTime()),
-												volume,
-												ORDER_BID,
-												ALGORITHMIC_BROKER_ID);
 				
-				Order newOrder = orderBuilder.build();
-				printOrder(newOrder);
-				newTrades.add(tradeMatcher(newOrder));
-				paired = true;
-			} else if (movingAverage <= -THRESHOLD && paired) {
-				// Average broke negative threshold, indicates we should sell (stock getting worse)
-				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-												finalTrade.getDateTime(),
-												findAskPriceAtTime(finalTrade.getDateTime()),
-												volume,
-												ORDER_ASK,
-												ALGORITHMIC_BROKER_ID);
-				
-				Order newOrder = orderBuilder.build();
-				printOrder(newOrder);
-				newTrades.add(tradeMatcher(newOrder));
-				paired = false;
+				// Calculate the current moving average.
+				double movingAverage = tradeReturn/i;
+				// Check if the moving average breaks the threshold.
+				if (movingAverage >= threshold && !paired) {
+					// Average broke positive threshold, indicates we should buy (stock getting better)
+					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+													finalTrade.getDateTime(),
+													findBidPriceAtTime(finalTrade.getDateTime()),
+													volume,
+													ORDER_BID,
+													ALGORITHMIC_BROKER_ID);
+					
+					Order newOrder = orderBuilder.build();
+					printOrder(newOrder);
+					newTrades.add(tradeMatcher(newOrder));
+					paired = true;
+				} else if (movingAverage <= -threshold && paired) {
+					// Average broke negative threshold, indicates we should sell (stock getting worse)
+					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+													finalTrade.getDateTime(),
+													findAskPriceAtTime(finalTrade.getDateTime()),
+													volume,
+													ORDER_ASK,
+													ALGORITHMIC_BROKER_ID);
+					
+					Order newOrder = orderBuilder.build();
+					printOrder(newOrder);
+					newTrades.add(tradeMatcher(newOrder));
+					paired = false;
+				}
 			}
 		}
 		
@@ -290,57 +298,65 @@ public class OrderbookImpl implements Orderbook {
 		return newTrades;
 	}
 	
-	private List<AlgorithmicTrade> newMeanRevisionOrders(String volume) {
+	private List<AlgorithmicTrade> newMeanReversionOrders(String volume, Integer lookBackPeriod, Double threshold) {
 		
 		List<AlgorithmicTrade> newTrades = new ArrayList<AlgorithmicTrade>();
 		
 		// Grab all the required order fields
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		
-		int maxIterations = tradeList.size()/LOOK_BACK_N;
+		// If user does not supply anything, use default values.
+		if (lookBackPeriod == null) {
+			lookBackPeriod = DEFAULT_LOOK_BACK_N;
+		}
+		if (threshold == null) {
+			threshold = DEFAULT_THRESHOLD;
+		}
+		
+		int maxIterations = tradeList.size()/lookBackPeriod;
 		boolean paired = false;
 		for (int j = 0; j < maxIterations; j++) {
 			// Look back on N number of trades to work out the momentum of the market.
 			double tradeReturn = 0.0;
 			Order finalTrade = null;
-			int shiftAcross = j*LOOK_BACK_N;
-			for (int i = shiftAcross; i < LOOK_BACK_N+shiftAcross && i < tradeList.size()-1; i++) {
+			int shiftAcross = j*lookBackPeriod;
+			for (int i = shiftAcross; i < lookBackPeriod+shiftAcross && i < tradeList.size()-1; i++) {
 				Order previousTrade = tradeList.get(i); 
 				Order tradeToCompare = tradeList.get(i+1);
 				double calculatedReturn = ((tradeToCompare.getPrice() - previousTrade.getPrice())/previousTrade.getPrice());
 				tradeReturn += calculatedReturn;
 				finalTrade = tradeToCompare;
-			}
-			
-			// Calculate the current moving average.
-			double movingAverage = tradeReturn/LOOK_BACK_N;
-			// Check if the moving average breaks the threshold.
-			if (movingAverage >= THRESHOLD && paired) {
-				// Average broke positive threshold, indicates we should buy (stock getting better)
-				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-												finalTrade.getDateTime(),
-												findAskPriceAtTime(finalTrade.getDateTime()),
-												volume,
-												ORDER_ASK,
-												ALGORITHMIC_BROKER_ID);
 				
-				Order newOrder = orderBuilder.build();
-				printOrder(newOrder);
-				newTrades.add(tradeMatcher(newOrder));
-				paired = false;
-			} else if (movingAverage <= -THRESHOLD && !paired) {
-				// Average broke negative threshold, indicates we should sell (stock getting worse)
-				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
-												finalTrade.getDateTime(),
-												findBidPriceAtTime(finalTrade.getDateTime()),
-												volume,
-												ORDER_BID,
-												ALGORITHMIC_BROKER_ID);
-				
-				Order newOrder = orderBuilder.build();
-				printOrder(newOrder);
-				newTrades.add(tradeMatcher(newOrder));
-				paired = true;
+				// Calculate the current moving average.
+				double movingAverage = tradeReturn/i;
+				// Check if the moving average breaks the threshold.
+				if (movingAverage >= threshold && paired) {
+					// Average broke positive threshold, indicates we should buy (stock getting better)
+					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+													finalTrade.getDateTime(),
+													findAskPriceAtTime(finalTrade.getDateTime()),
+													volume,
+													ORDER_ASK,
+													ALGORITHMIC_BROKER_ID);
+					
+					Order newOrder = orderBuilder.build();
+					printOrder(newOrder);
+					newTrades.add(tradeMatcher(newOrder));
+					paired = false;
+				} else if (movingAverage <= -threshold && !paired) {
+					// Average broke negative threshold, indicates we should sell (stock getting worse)
+					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
+													finalTrade.getDateTime(),
+													findBidPriceAtTime(finalTrade.getDateTime()),
+													volume,
+													ORDER_BID,
+													ALGORITHMIC_BROKER_ID);
+					
+					Order newOrder = orderBuilder.build();
+					printOrder(newOrder);
+					newTrades.add(tradeMatcher(newOrder));
+					paired = true;
+				}
 			}
 		}
 		
@@ -357,7 +373,7 @@ public class OrderbookImpl implements Orderbook {
 	private double findAskPriceAtTime(Date dateTime) {
 		
 		double price = 0.0;
-		Order previousPrice = askList.get(0);
+		Order previousPrice = askList.get(FIRST_ELEMENT);
 		
 		for (Order ask : askList) {
 			if (ask.getDateTime().getTime() > dateTime.getTime()) {
@@ -380,7 +396,7 @@ public class OrderbookImpl implements Orderbook {
 	private double findBidPriceAtTime(Date dateTime) {
 		
 		double price = 0.0;
-		Order previousPrice = askList.get(0);
+		Order previousPrice = askList.get(FIRST_ELEMENT);
 		
 		for (Order bid : bidList) {
 			if (bid.getDateTime().getTime() > dateTime.getTime()) {

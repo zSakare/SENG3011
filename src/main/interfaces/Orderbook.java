@@ -61,7 +61,10 @@ public interface Orderbook {
 	 * 
 	 * @param strategy - the strategy to use.
 	 * @param volume - the amount to sell or buy
+	 * @param lookBackPeriod - the number of trades to look back
+	 * @param threshold - the threshold for momentum and mean reversion to trigger.
+	 * @return a list of trades to run.
 	 */
-	public List<AlgorithmicTrade> runStrategy(Strategy strategy, String volume);
+	public List<AlgorithmicTrade> runStrategy(Strategy strategy, String volume, Integer lookBackPeriod, Double threshold);
 
 }

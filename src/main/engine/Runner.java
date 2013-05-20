@@ -48,14 +48,14 @@ public class Runner {
 						System.out.println("Current available strategies: ");
 						System.out.println("'R' - Random");
 						System.out.println("'M' - Momentum");
-						System.out.println("'MR' - Mean Revision");
+						System.out.println("'MR' - Mean Reversion");
 						strategy = keyIn.next();
 						if (("R").equals(strategy)) {
 							strat = Strategy.RANDOM;
 						} else if (("M").equals(strategy)) {
 							strat = Strategy.MOMENTUM;
 						} else if (("MR").equals(strategy)) {
-							strat = Strategy.MEAN_REVISION;
+							strat = Strategy.MEAN_REVERSION;
 						} else {
 							System.err.println("Please input a correct strategy");
 							strategy = "";
@@ -73,9 +73,22 @@ public class Runner {
 						}
 					}
 					
+					Integer lookbackPeriod = null;
+					Double threshold = null;
+					if (strat == Strategy.MEAN_REVERSION || strat == Strategy.MOMENTUM) {
+						while (lookbackPeriod == null) {
+							System.out.println("Please Enter a lookback period");
+							lookbackPeriod = keyIn.nextInt();
+						}
+						while (threshold == null) {
+							System.out.println("Please enter a threshold");
+							threshold = keyIn.nextDouble();
+						}
+					}
+					
 					System.out.println("Simulating...");
 					List<AlgorithmicTrade> tradeList = new ArrayList<AlgorithmicTrade>();
-					tradeList.addAll(orderbook.runStrategy(strat, volume));
+					tradeList.addAll(orderbook.runStrategy(strat, volume, lookbackPeriod, threshold));
 					
 					System.out.println("Evaluating strategy");
 					TradeStrategyEvaluator evaluator = new TradeStrategyEvaluator(tradeList);

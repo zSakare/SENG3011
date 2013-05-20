@@ -10,6 +10,8 @@ public class Controller {
 	private TradeStrategyEvaluator evaluator;
 	private Strategy strategy;
 	private String volume;
+	private Integer lookbackPeriod;
+	private Double threshold;
 	private static final int PERCENTAGE_SCALE = 100;
 	
 	public void setOrderbook(String fileName) {
@@ -21,14 +23,18 @@ public class Controller {
 			this.strategy = Strategy.RANDOM;
 		} else if (("Momentum").equals(strategy)) {
 			this.strategy = Strategy.MOMENTUM;
-		} else if (("Mean-Revision").equals(strategy)) {
-			this.strategy = Strategy.MEAN_REVISION;
+		} else if (("Mean Reversion").equals(strategy)) {
+			this.strategy = Strategy.MEAN_REVERSION;
 		}
 	}
 
+	public Strategy getStrategy() {
+		return strategy;
+	}
+	
 	public void runStrategy() {
 		if(strategy != null && volume != null){
-			evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume));
+			evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume, lookbackPeriod, threshold));
 		}
 	}
 	
@@ -43,5 +49,33 @@ public class Controller {
 		
 		// print return to 2 decimal places.
 		System.out.printf("Percentage return: %.2f%%\n", evaluation);
+	}
+
+	public Integer getLookbackPeriod() {
+		return lookbackPeriod;
+	}
+
+	public void setLookbackPeriod(String lookbackPeriod) throws NumberFormatException {
+		if (lookbackPeriod.isEmpty()) {
+			lookbackPeriod = null;
+			System.out.println("Using default value 1000");
+		} else {
+			this.lookbackPeriod = Integer.parseInt(lookbackPeriod);
+			System.out.println("Lookback period set to: " + this.lookbackPeriod);
+		}
+	}
+
+	public Double getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(String threshold) throws NumberFormatException {
+		if (threshold.isEmpty()) {
+			this.threshold = null;
+			System.out.println("Using default value 0.000001");
+		} else {
+			this.threshold = Double.parseDouble(threshold);
+			System.out.println("Threshold set to: " + this.threshold);
+		}
 	}
 }

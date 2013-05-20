@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import main.gui.controller.Controller;
+import main.utils.Strategy;
 
 
 public class RunnerGUI {
@@ -114,7 +115,7 @@ public class RunnerGUI {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(3);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Random", "Momentum", "Mean-Revision"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Random", "Momentum", "Mean Reversion"}));
 		comboBox.setToolTipText("Choose Strategy");
         ActionListener actionListener = new ActionListener() {
             @Override
@@ -124,7 +125,32 @@ public class RunnerGUI {
                 controller.setStrategy(strategy);
                 String volume = JOptionPane.showInputDialog(null,"Enter a Volume to trade.", "Volume", JOptionPane.QUESTION_MESSAGE);
                 controller.setVolume(volume);
+                
+                if (controller.getStrategy() == Strategy.MOMENTUM || controller.getStrategy() == Strategy.MEAN_REVERSION) {
+                	setLookbackPeriod();
+                	setThreshold();
+                }
             }
+
+			private void setThreshold() {
+				try {
+					String threshold = JOptionPane.showInputDialog(null, "Enter a trading threshold. Default is 0.0000001.", "Threshold", JOptionPane.QUESTION_MESSAGE);
+					controller.setThreshold(threshold);
+				} catch (NumberFormatException e) {
+					System.err.println("Please enter an appropriate number.");
+					setThreshold();
+				}
+			}
+
+			private void setLookbackPeriod() {
+				try {
+					String lookbackPeriod = JOptionPane.showInputDialog(null, "Enter a lookback period. Default is 1000.", "Lookback Period", JOptionPane.QUESTION_MESSAGE);
+					controller.setLookbackPeriod(lookbackPeriod);
+				} catch (NumberFormatException e) {
+					System.err.println("Please enter an appropriate number.");
+					setLookbackPeriod();
+				}
+			}
         };   
         comboBox.addActionListener(actionListener);
 
@@ -156,7 +182,6 @@ public class RunnerGUI {
 		btnQuit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO: Exit handler
 			    System.exit(0);
 
 			}
@@ -173,9 +198,7 @@ public class RunnerGUI {
 		btnExecuteStrategy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO: Link to strategy executor
 				controller.runStrategy();
-				
 			}
 		});
 		GridBagConstraints gbc_btnExecuteStrategy = new GridBagConstraints();

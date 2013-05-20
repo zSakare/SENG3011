@@ -54,7 +54,7 @@ public class OrderbookImplTest {
 		Strategy strategy = Strategy.RANDOM;
 		String randVolume = "999";
 		
-		List<AlgorithmicTrade> randomTradeList = randomOrderBook.runStrategy(strategy, randVolume);
+		List<AlgorithmicTrade> randomTradeList = randomOrderBook.runStrategy(strategy, randVolume, null, null);
 		assertNotNull("Checking randomTradeList is not empty...", randomTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : randomTradeList) {
@@ -86,7 +86,7 @@ public class OrderbookImplTest {
 		Strategy strategy = Strategy.MOMENTUM;
 		String randVolume = "999";
 		
-		List<AlgorithmicTrade> posMomentumTradeList = momentumOrderbook.runStrategy(strategy, randVolume);
+		List<AlgorithmicTrade> posMomentumTradeList = momentumOrderbook.runStrategy(strategy, randVolume, null, null);
 		assertNotNull("Checking MomentumTradeList is not empty...", posMomentumTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : posMomentumTradeList) {
@@ -115,7 +115,7 @@ public class OrderbookImplTest {
 		Strategy strategy = Strategy.MOMENTUM;
 		String randVolume = "999";
 		
-		List<AlgorithmicTrade> negMomentumTradeList = momentumOrderbook.runStrategy(strategy, randVolume);
+		List<AlgorithmicTrade> negMomentumTradeList = momentumOrderbook.runStrategy(strategy, randVolume, null, null);
 		assertNotNull("Checking MomentumTradeList is not empty...", negMomentumTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : negMomentumTradeList) {
@@ -141,10 +141,10 @@ public class OrderbookImplTest {
 		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
 				ListGenerator.generateMeanRevAskList(), 
 				ListGenerator.generatePositiveMeanRevTradeList());
-		Strategy strategy = Strategy.MEAN_REVISION;
+		Strategy strategy = Strategy.MEAN_REVERSION;
 		String randVolume = "999";
 		
-		List<AlgorithmicTrade> posMeanRevTradeList = meanRevOrderbook.runStrategy(strategy, randVolume);
+		List<AlgorithmicTrade> posMeanRevTradeList = meanRevOrderbook.runStrategy(strategy, randVolume, null, null);
 		assertNotNull("Checking MeanRevTradeList is not empty...", posMeanRevTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : posMeanRevTradeList) {
@@ -170,10 +170,10 @@ public class OrderbookImplTest {
 		OrderbookImpl meanRevOrderbook = new OrderbookImpl (ListGenerator.generateMeanRevBidList(), 
 				ListGenerator.generateMeanRevAskList(), 
 				ListGenerator.generateNegativeMeanRevTradeList());
-		Strategy strategy = Strategy.MEAN_REVISION;
+		Strategy strategy = Strategy.MEAN_REVERSION;
 		String randVolume = "999";
 		
-		List<AlgorithmicTrade> negMeanRevTradeList = meanRevOrderbook.runStrategy(strategy, randVolume);
+		List<AlgorithmicTrade> negMeanRevTradeList = meanRevOrderbook.runStrategy(strategy, randVolume, null, null);
 		assertNotNull("Checking MeanRevTradeList is not empty...", negMeanRevTradeList);
 		
 		for (AlgorithmicTrade algorithmicTrade : negMeanRevTradeList) {
