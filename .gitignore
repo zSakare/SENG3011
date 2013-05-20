@@ -1,5 +1,5 @@
+*.class
+*.syntex.gz
 .DS_Store
 .settings/
-*.synctex.gz
 .metadata/
-*.class
