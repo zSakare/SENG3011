@@ -11,7 +11,6 @@ public class Controller {
 	private Strategy strategy;
 	private String volume;
 	private static final int PERCENTAGE_SCALE = 100;
-
 	
 	public void setOrderbook(String fileName) {
 		orderbook = SircaCSVParser.input(fileName);
@@ -32,6 +31,7 @@ public class Controller {
 			evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume));
 		}
 	}
+	
 	public void setVolume(String volume) {
 		this.volume = volume;
 	}

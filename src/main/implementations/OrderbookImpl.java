@@ -18,7 +18,7 @@ import main.utils.TimeUtil;
 public class OrderbookImpl implements Orderbook {
 
 	private static final int FIRST_ELEMENT = 0;
-	private static final String RANDOM_BROKER_ID = "6969";
+	private static final String ALGORITHMIC_BROKER_ID = "6969";
 	private static final String ORDER_BID = "B";
 	private static final String ORDER_ASK = "A";
 	private static final int LOOK_BACK_N = 1000;
@@ -122,7 +122,7 @@ public class OrderbookImpl implements Orderbook {
 		dateSetter.set(Calendar.MILLISECOND, TimeUtil.generateMillis());
 		dateSetter.set(Calendar.SECOND, TimeUtil.generateSeconds());
 		date = dateSetter.getTime();
-		String buyerBrokerId = RANDOM_BROKER_ID;
+		String buyerBrokerId = ALGORITHMIC_BROKER_ID;
 		String bidOrAsk = ORDER_BID;
 		
 		double lowest = findLowestPrice(date);
@@ -166,7 +166,7 @@ public class OrderbookImpl implements Orderbook {
 		dateSetter.set(Calendar.MILLISECOND, TimeUtil.generateMillis());
 		dateSetter.set(Calendar.SECOND, TimeUtil.generateSeconds());
 		date = dateSetter.getTime();
-		String sellerBrokerId = RANDOM_BROKER_ID;
+		String sellerBrokerId = ALGORITHMIC_BROKER_ID;
 		String bidOrAsk = ORDER_ASK;
 		
 		double highest = findHighestPrice(date);
@@ -240,6 +240,7 @@ public class OrderbookImpl implements Orderbook {
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		
 		int maxIterations = tradeList.size()/LOOK_BACK_N;
+		boolean paired = false;
 		for (int j = 0; j < maxIterations; j++) {
 			// Look back on N number of trades to work out the momentum of the market.
 			double tradeReturn = 0.0;
@@ -256,30 +257,32 @@ public class OrderbookImpl implements Orderbook {
 			// Calculate the current moving average.
 			double movingAverage = tradeReturn/LOOK_BACK_N;
 			// Check if the moving average breaks the threshold.
-			if (movingAverage >= THRESHOLD) {
+			if (movingAverage >= THRESHOLD && !paired) {
 				// Average broke positive threshold, indicates we should buy (stock getting better)
 				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
 												finalTrade.getDateTime(),
-												findLowestPrice(finalTrade.getDateTime()),
+												findBidPriceAtTime(finalTrade.getDateTime()),
 												volume,
 												ORDER_BID,
-												RANDOM_BROKER_ID);
+												ALGORITHMIC_BROKER_ID);
 				
 				Order newOrder = orderBuilder.build();
 				printOrder(newOrder);
 				newTrades.add(tradeMatcher(newOrder));
-			} else if (movingAverage <= -THRESHOLD) {
+				paired = true;
+			} else if (movingAverage <= -THRESHOLD && paired) {
 				// Average broke negative threshold, indicates we should sell (stock getting worse)
 				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
 												finalTrade.getDateTime(),
-												findHighestPrice(finalTrade.getDateTime()),
+												findAskPriceAtTime(finalTrade.getDateTime()),
 												volume,
 												ORDER_ASK,
-												RANDOM_BROKER_ID);
+												ALGORITHMIC_BROKER_ID);
 				
 				Order newOrder = orderBuilder.build();
 				printOrder(newOrder);
 				newTrades.add(tradeMatcher(newOrder));
+				paired = false;
 			}
 		}
 		
@@ -295,7 +298,7 @@ public class OrderbookImpl implements Orderbook {
 		String instrument = askList.get(FIRST_ELEMENT).getInstrument();
 		
 		int maxIterations = tradeList.size()/LOOK_BACK_N;
-		System.out.println(maxIterations);
+		boolean paired = false;
 		for (int j = 0; j < maxIterations; j++) {
 			// Look back on N number of trades to work out the momentum of the market.
 			double tradeReturn = 0.0;
@@ -312,35 +315,83 @@ public class OrderbookImpl implements Orderbook {
 			// Calculate the current moving average.
 			double movingAverage = tradeReturn/LOOK_BACK_N;
 			// Check if the moving average breaks the threshold.
-			if (movingAverage >= THRESHOLD) {
+			if (movingAverage >= THRESHOLD && paired) {
 				// Average broke positive threshold, indicates we should buy (stock getting better)
 				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
 												finalTrade.getDateTime(),
-												findHighestPrice(finalTrade.getDateTime()),
+												findAskPriceAtTime(finalTrade.getDateTime()),
 												volume,
 												ORDER_ASK,
-												RANDOM_BROKER_ID);
+												ALGORITHMIC_BROKER_ID);
 				
 				Order newOrder = orderBuilder.build();
 				printOrder(newOrder);
 				newTrades.add(tradeMatcher(newOrder));
-			} else if (movingAverage <= -THRESHOLD) {
+				paired = false;
+			} else if (movingAverage <= -THRESHOLD && !paired) {
 				// Average broke negative threshold, indicates we should sell (stock getting worse)
 				OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
 												finalTrade.getDateTime(),
-												findLowestPrice(finalTrade.getDateTime()),
+												findBidPriceAtTime(finalTrade.getDateTime()),
 												volume,
 												ORDER_BID,
-												RANDOM_BROKER_ID);
+												ALGORITHMIC_BROKER_ID);
 				
 				Order newOrder = orderBuilder.build();
 				printOrder(newOrder);
 				newTrades.add(tradeMatcher(newOrder));
+				paired = true;
 			}
 		}
 		
 		// Match any new orders.
 		return newTrades;
+	}
+
+	/**
+	 * Helper function to determine price for ask orders at a given point (used for market orders)
+	 * 
+	 * @param dateTime - time to look up until.
+	 * @return the price closest to a given point of time.
+	 */
+	private double findAskPriceAtTime(Date dateTime) {
+		
+		double price = 0.0;
+		Order previousPrice = askList.get(0);
+		
+		for (Order ask : askList) {
+			if (ask.getDateTime().getTime() > dateTime.getTime()) {
+				price = previousPrice.getPrice();
+				break;
+			} else {
+				previousPrice = ask;
+			}
+		}
+		
+		return price;
+	}
+
+	/**
+	 * Helper function to determine price for bid orders at a given point (used for market orders)
+	 * 
+	 * @param dateTime - time to look up until.
+	 * @return the price closest to a given point of time.
+	 */
+	private double findBidPriceAtTime(Date dateTime) {
+		
+		double price = 0.0;
+		Order previousPrice = askList.get(0);
+		
+		for (Order bid : bidList) {
+			if (bid.getDateTime().getTime() > dateTime.getTime()) {
+				price = previousPrice.getPrice();
+				break;
+			} else {
+				previousPrice = bid;
+			}
+		}
+		
+		return price;
 	}
 	
 }
