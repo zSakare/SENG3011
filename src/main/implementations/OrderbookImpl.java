@@ -295,6 +295,9 @@ public class OrderbookImpl implements Orderbook {
 		}
 		
 		// Match any new orders.
+		if (newTrades.size() % 2 != 0) {
+			newTrades.remove(newTrades.size()-1);
+		}
 		return newTrades;
 	}
 	
@@ -361,6 +364,9 @@ public class OrderbookImpl implements Orderbook {
 		}
 		
 		// Match any new orders.
+		if (newTrades.size() % 2 != 0) {
+			newTrades.remove(newTrades.size()-1);
+		}
 		return newTrades;
 	}
 

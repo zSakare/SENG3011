@@ -35,6 +35,7 @@ public class Controller {
 	public void runStrategy() {
 		if(strategy != null && volume != null){
 			evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume, lookbackPeriod, threshold));
+			
 		}
 	}
 	

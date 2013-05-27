@@ -88,7 +88,6 @@ public class OrderBuilderImpl implements OrderBuilder {
 	
 	public OrderBuilderImpl (String security, Date date, double price, String volume,
 				String brokerID) {
-		// TODO: MIKE FIX THE CONSTRUCTOR YOU DICK.
 		
 		setSecurity(security);
 		setDateTime(date);
