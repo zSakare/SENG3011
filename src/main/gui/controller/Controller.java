@@ -33,9 +33,12 @@ public class Controller {
 	}
 	
 	public void runStrategy() {
-		if(strategy != null && volume != null){
-			evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume, lookbackPeriod, threshold));
-			
+		if (orderbook != null) {
+			if(strategy != null && volume != null){
+				evaluator = new TradeStrategyEvaluator(orderbook.runStrategy(strategy, volume, lookbackPeriod, threshold));
+			}
+		} else {
+			System.err.println("Please load an orderbook prior to simulation.");
 		}
 	}
 	
@@ -44,12 +47,16 @@ public class Controller {
 	}
 
 	public void evaluate() {
-		double evaluation = evaluator.calculateProfitLoss();
-
-		evaluation = evaluation*PERCENTAGE_SCALE;
-		
-		// print return to 2 decimal places.
-		System.out.printf("Percentage return: %.2f%%\n", evaluation);
+		if (orderbook != null) {
+			double evaluation = evaluator.calculateProfitLoss();
+	
+			evaluation = evaluation*PERCENTAGE_SCALE;
+			
+			// print return to 2 decimal places.
+			System.out.printf("Percentage return: %.2f%%\n", evaluation);
+		} else {
+			System.err.println("Please load an orderbook prior to simulation.");
+		}
 	}
 
 	public Integer getLookbackPeriod() {
