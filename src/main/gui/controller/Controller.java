@@ -1,7 +1,6 @@
 package main.gui.controller;
 
 import main.evaluator.TradeStrategyEvaluator;
-import main.gui.view.TradeGraphPlotter;
 import main.interfaces.Orderbook;
 import main.parser.SircaCSVParser;
 import main.utils.Strategy;
@@ -16,6 +15,11 @@ public class Controller {
 	private static final int PERCENTAGE_SCALE = 100;
 	
 	public void setOrderbook(String fileName) {
+		evaluator = null;
+		strategy = null;
+		volume = null;
+		lookbackPeriod = null;
+		threshold = null;
 		orderbook = SircaCSVParser.input(fileName);
 	}
 

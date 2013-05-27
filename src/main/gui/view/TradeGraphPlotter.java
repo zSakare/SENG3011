@@ -16,10 +16,13 @@ import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.Minute;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
 
 public class TradeGraphPlotter extends JDialog {
 
@@ -29,49 +32,42 @@ public class TradeGraphPlotter extends JDialog {
 
 	public TradeGraphPlotter(String appTitle, String chartTitle, Map<AlgorithmicTrade, AlgorithmicTrade> tradePair) {
 		this.tradePair = tradePair;
-		XYSeriesCollection xySeries = createDataSet();
+		XYDataset xySeries = createDataSet();
 		JFreeChart chart = createChart(xySeries, chartTitle);
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new Dimension(1024, 720));
 		setContentPane(chartPanel);
 	}
 
-	private XYSeriesCollection createDataSet() {
-		XYSeries bidData = new XYSeries("Bids");
-		XYSeries askData = new XYSeries("Asks");
-		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
+	private XYDataset createDataSet() {
+		final TimeSeriesCollection dataset = new TimeSeriesCollection();
+		
+		TimeSeries bidData = new TimeSeries("Bid Trades");
+		TimeSeries askData = new TimeSeries("Ask Trades");
 		
 		List<AlgorithmicTrade> keys = new ArrayList<AlgorithmicTrade>();
 		keys.addAll(tradePair.keySet());
 		
 		for (AlgorithmicTrade bid : keys) {
 			AlgorithmicTrade ask = tradePair.get(bid);
-			bidData.add(bid.getBidOrder().getDateTime().getTime(), bid.getBidOrder().getPrice());
-			askData.add(ask.getAskOrder().getDateTime().getTime(), ask.getAskOrder().getPrice());
+			bidData.add(new Millisecond(bid.getBidOrder().getDateTime()), bid.getBidOrder().getPrice());
+			askData.add(new Millisecond(ask.getAskOrder().getDateTime()), ask.getAskOrder().getPrice());
 		}
 		
-		xySeriesCollection.addSeries(bidData);
-		xySeriesCollection.addSeries(askData);
+		dataset.addSeries(bidData);
+		dataset.addSeries(askData);
 		
-		return xySeriesCollection;
+		return dataset;
 	}
 
-	private JFreeChart createChart(XYSeriesCollection xySeriesCollection, String chartTitle) {
-		JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, 
+	private JFreeChart createChart(XYDataset dataSet, String chartTitle) {
+		JFreeChart chart = ChartFactory.createTimeSeriesChart(chartTitle, 
 				"Time", 
 				"Price", 
-				xySeriesCollection, 
-				PlotOrientation.HORIZONTAL, 
+				dataSet, 
 				true, 
 				true, 
 				false);
-		
-		XYPlot plot = (XYPlot) chart.getPlot();
-		NumberAxis domain = (NumberAxis) plot.getDomainAxis();
-		domain.setRange(0, 30);
-		domain.setTickUnit(new NumberTickUnit(1));
-		DateAxis range = (DateAxis) plot.getRangeAxis();
-		range.setTickUnit(new DateTickUnit(DateTickUnit.SECOND, 60));
 		
 		return chart;
 	}
