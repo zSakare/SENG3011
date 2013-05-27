@@ -105,6 +105,7 @@ public class RunnerGUI {
 				controller.setOrderbook(fileName);
 			}
 		});
+		
 		GridBagConstraints gbc_btnLoadInputFile = new GridBagConstraints();
 		gbc_btnLoadInputFile.anchor = GridBagConstraints.SOUTH;
 		gbc_btnLoadInputFile.fill = GridBagConstraints.HORIZONTAL;
