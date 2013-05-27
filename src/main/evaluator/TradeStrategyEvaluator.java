@@ -1,6 +1,10 @@
 package main.evaluator;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import main.implementations.order.AlgorithmicTrade;
 
 /**
@@ -17,14 +21,16 @@ public class TradeStrategyEvaluator {
 	private static final String ASK = "A";
 
 	private List<AlgorithmicTrade> tradeList;
+	private Map<AlgorithmicTrade, AlgorithmicTrade> tradePair;
 	
 	/**
 	 * Constructor accepts list of algorithmic trades to evaluate.
 	 * @param tradeList The list of algorithmic trades of TradeList type. 
-	 * (TradeList type not yet implemented.)
 	 * */
 	public TradeStrategyEvaluator(List<AlgorithmicTrade> tradeList) {
 		this.tradeList = tradeList;
+		tradePair = new HashMap<AlgorithmicTrade, AlgorithmicTrade>();
+		setTradePairs();
 	}
 	
 	/**
@@ -36,17 +42,13 @@ public class TradeStrategyEvaluator {
 		double profit = 0;
 		double purchasePrice = 0;
 		
-		for (AlgorithmicTrade trade : tradeList) {
-			try {
-				if (ALGORITHMIC_BROKER_ID.equals(trade.getAskOrder().getSellerBrokerId())) {
-					// We are the seller - value will be added to profits.
-					profit += trade.evaluateTrade();
-				} else if (ALGORITHMIC_BROKER_ID.equals(trade.getBidOrder().getBuyerBrokerId())) {
-					// We are the buyer - value will be added to losses.
-					purchasePrice += trade.evaluateTrade();
-				}
-			} catch (NullPointerException e) {
-			}
+		List<AlgorithmicTrade> keys = new ArrayList<AlgorithmicTrade>();
+		keys.addAll(tradePair.keySet());
+		
+		for (AlgorithmicTrade bids : keys) {
+			AlgorithmicTrade ask = tradePair.get(bids);
+			purchasePrice += bids.evaluateTrade();
+			profit += ask.evaluateTrade();
 		}
 		
 		// print the prices to 2 decimal places.
@@ -55,5 +57,27 @@ public class TradeStrategyEvaluator {
 		double percent = (profit - purchasePrice)/purchasePrice;
 		return percent;
 	}
+	
+	public void setTradePairs() { 
+		
+		// gets the size of the tradeList for the while loop
+		int tradeListSize = tradeList.size();
+		// initialize the counter
+		int i = 0;
+		
+		// while the tradeList is not empty and the counter is less than the size
+		while (tradeList != null && i < tradeListSize - 1) { 
+			// because in the way we add to the tradeList
+			AlgorithmicTrade bidTrade = tradeList.get(i);		// we know that the first one is a bid
+			AlgorithmicTrade askTrade = tradeList.get(i + 1);	// and the next will always be the ask
+			tradePair.put(bidTrade, askTrade);
+			i += 2;
+		}
+	}
+	
+	public Map<AlgorithmicTrade, AlgorithmicTrade> getTradePair() {
+		return this.tradePair;
+	}
+	
 	
 }
