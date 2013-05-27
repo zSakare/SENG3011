@@ -1,6 +1,7 @@
 package main.gui.controller;
 
 import main.evaluator.TradeStrategyEvaluator;
+import main.gui.view.TradeGraphPlotter;
 import main.interfaces.Orderbook;
 import main.parser.SircaCSVParser;
 import main.utils.Strategy;
@@ -85,5 +86,9 @@ public class Controller {
 			this.threshold = Double.parseDouble(threshold);
 			System.out.println("Threshold set to: " + this.threshold);
 		}
+	}
+
+	public TradeStrategyEvaluator getEvaluator() {
+		return evaluator;
 	}
 }

@@ -169,6 +169,11 @@ public class RunnerGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.evaluate();
+				TradeGraphPlotter plot = new TradeGraphPlotter("Algorithmic Trades", 
+						"Algorithmic Trade Plot", 
+						controller.getEvaluator().getTradePair());
+				plot.setVisible(true);
+				plot.setBounds(0, 0, 1024, 720);
 			}
 		});
 		GridBagConstraints gbc_btnPerformanceReport = new GridBagConstraints();
