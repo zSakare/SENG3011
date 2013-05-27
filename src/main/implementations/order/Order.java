@@ -172,4 +172,33 @@ public class Order {
 		this.sellerBrokerId = sellerBrokerId;
 	}
 	
+	public boolean equals(Object o) {
+		boolean equals = false;
+		
+		if (o != null) {
+			Order order = (Order) o;
+			if (this.isBid == order.isBid
+					&& this.askId == order.askId
+					&& this.bidId == order.bidId
+					&& this.buyerBrokerId == order.buyerBrokerId
+					&& this.dateTime == order.dateTime
+					&& this.entryTime == order.entryTime
+					&& this.instrument == order.instrument
+					&& this.oldPrice == order.oldPrice
+					&& this.oldVolume == order.oldVolume
+					&& this.price == order.price
+					&& this.qualifiers == order.qualifiers
+					&& this.recordType == order.recordType
+					&& this.sellerBrokerId == order.sellerBrokerId
+					&& this.transactionId == order.transactionId
+					&& this.undisclosedVolume == order.undisclosedVolume
+					&& this.value == order.value
+					&& this.volume == order.volume) {
+				equals = true;
+			}
+		}
+		
+		return equals;
+	}
+	
 }
