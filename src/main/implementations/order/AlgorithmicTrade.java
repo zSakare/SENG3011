@@ -38,4 +38,21 @@ public class AlgorithmicTrade {
 		
 		return bidOrder.getPrice()*lowerVolume;
 	}
+	
+	public boolean equals(Object o) {
+		boolean equals = false;
+		
+		if (o != null) {
+			AlgorithmicTrade trade = (AlgorithmicTrade) o;
+			if (this.getBidOrder().equals(trade.getBidOrder()) && this.getAskOrder().equals(trade.getAskOrder())) {
+				equals = true;
+			}
+		}
+		
+		return equals;
+	}
+	
+	public int hashCode() {
+		return (int) (this.bidOrder.getDateTime().getTime() + this.bidOrder.getPrice() + this.askOrder.getDateTime().getTime() + this.askOrder.getPrice());
+	}
 }

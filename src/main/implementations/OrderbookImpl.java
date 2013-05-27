@@ -150,7 +150,7 @@ public class OrderbookImpl implements Orderbook {
 			orderType = "Ask";
 		}
 		
-		System.out.println(orderType + " order generated. Price: " + newOrder.getPrice() + " Quantity: " + newOrder.getVolume());
+		System.out.println(orderType + " order generated at " + newOrder.getDateTime() + ". Price: " + newOrder.getPrice() + " Quantity: " + newOrder.getVolume());
 	}
 
 
@@ -274,9 +274,11 @@ public class OrderbookImpl implements Orderbook {
 													ALGORITHMIC_BROKER_ID);
 					
 					Order newOrder = orderBuilder.build();
-					printOrder(newOrder);
-					newTrades.add(tradeMatcher(newOrder));
-					paired = true;
+					if (tradeMatcher(newOrder) != null) {
+						printOrder(newOrder);
+						newTrades.add(tradeMatcher(newOrder));
+						paired = true;
+					}
 				} else if (movingAverage <= -threshold && paired) {
 					// Average broke negative threshold, indicates we should sell (stock getting worse)
 					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -287,9 +289,11 @@ public class OrderbookImpl implements Orderbook {
 													ALGORITHMIC_BROKER_ID);
 					
 					Order newOrder = orderBuilder.build();
-					printOrder(newOrder);
-					newTrades.add(tradeMatcher(newOrder));
-					paired = false;
+					if (tradeMatcher(newOrder) != null) {
+						printOrder(newOrder);
+						newTrades.add(tradeMatcher(newOrder));
+						paired = false;
+					}
 				}
 			}
 		}
@@ -343,9 +347,11 @@ public class OrderbookImpl implements Orderbook {
 													ALGORITHMIC_BROKER_ID);
 					
 					Order newOrder = orderBuilder.build();
-					printOrder(newOrder);
-					newTrades.add(tradeMatcher(newOrder));
-					paired = false;
+					if (tradeMatcher(newOrder) != null) {
+						printOrder(newOrder);
+						newTrades.add(tradeMatcher(newOrder));
+						paired = false;
+					}
 				} else if (movingAverage <= -threshold && !paired) {
 					// Average broke negative threshold, indicates we should sell (stock getting worse)
 					OrderBuilder orderBuilder = new OrderBuilderImpl(instrument,
@@ -356,9 +362,11 @@ public class OrderbookImpl implements Orderbook {
 													ALGORITHMIC_BROKER_ID);
 					
 					Order newOrder = orderBuilder.build();
-					printOrder(newOrder);
-					newTrades.add(tradeMatcher(newOrder));
-					paired = true;
+					if (tradeMatcher(newOrder) != null) {
+						printOrder(newOrder);
+						newTrades.add(tradeMatcher(newOrder));
+						paired = true;
+					}
 				}
 			}
 		}
