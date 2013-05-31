@@ -64,8 +64,8 @@ public class TradeStrategyEvaluatorTest {
 		System.out.print("Testing if profit calculation is correct with 1 buy and 2 sells......");
 		TradeStrategyEvaluator evaluator = new TradeStrategyEvaluator(testPositiveTradeList());
 		
-		// Should be 100% (double spent)
-		assert (evaluator.calculateProfitLoss() == 1.0);
+		// Should break even, trades should only occur in pairs to accommodate mean reversion and momentum
+		assert (evaluator.calculateProfitLoss() == 0.0);
 		System.out.println("Test Passed!");
 	}
 	
@@ -74,8 +74,8 @@ public class TradeStrategyEvaluatorTest {
 		System.out.print("Testing if profit calculation is correct with 2 buy and 1 sells......");
 		TradeStrategyEvaluator evaluator = new TradeStrategyEvaluator(testNegativeTradeList());
 		
-		// Should be -50% (lose half)
-		assert (evaluator.calculateProfitLoss() == -0.5);
+		// Should break even, trades should only occur in pairs to accommodate mean reversion and momentum
+		assert (evaluator.calculateProfitLoss() == 0.0);
 		System.out.println("Test Passed!");
 	}
 	

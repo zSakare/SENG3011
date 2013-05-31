@@ -2,11 +2,14 @@ package test.implementations;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import main.implementations.OrderBuilderImpl;
 import main.implementations.OrderbookImpl;
 import main.implementations.order.AlgorithmicTrade;
 import main.implementations.order.Order;
+import main.interfaces.OrderBuilder;
 import main.utils.Strategy;
 
 import org.junit.After;
@@ -187,8 +190,151 @@ public class OrderbookImplTest {
 	@Test
 	public void testTradeMatcher() {
 		
+		System.out.print("Testing trade matching mechanism......");
 		
+		OrderbookImpl matcherOrderbook = new OrderbookImpl(ListGenerator.generateRandomBidList(),
+				ListGenerator.generateRandomAskList(),
+				null);
 		
+		double priceToMatch = 1000.5;
+		
+		OrderBuilder orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		
+		// Check an order matched.
+		assert(matcherOrderbook.tradeMatcher(orderMaker.build()) != null);
+		assert(matcherOrderbook.tradeMatcher(orderMaker.build()).getAskOrder().getPrice() == matcherOrderbook.tradeMatcher(orderMaker.build()).getBidOrder().getPrice());
+		System.out.println("Test Passed.");
 	}
-
+	
+	@Test
+	public void testTradeMatcherFails() {
+		
+		System.out.print("Testing trade matching mechanism with no match......");
+		
+		OrderbookImpl matcherOrderbook = new OrderbookImpl(ListGenerator.generateRandomBidList(),
+				ListGenerator.generateRandomAskList(),
+				null);
+		
+		double priceToMatch = 923.1;
+		
+		OrderBuilder orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		
+		// Check an order matched.
+		assert(matcherOrderbook.tradeMatcher(orderMaker.build()) == null);
+		System.out.println("Test Passed.");
+	}
+	
+	@Test
+	public void testTradeMatcherManyTrades() {
+		
+		System.out.print("Testing trade matching with many orders......");
+		
+		OrderbookImpl matcherOrderbook = new OrderbookImpl(ListGenerator.generateRandomBidList(),
+				ListGenerator.generateRandomAskList(),
+				null);
+		
+		List<Order> ordersToMatch = new ArrayList<Order>();
+		
+		double priceToMatch = 1000.5;
+		
+		OrderBuilder orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		priceToMatch = 1001;
+		
+		orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		priceToMatch = 1001.5;
+		
+		orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		// Check an order matched.
+		assert(matcherOrderbook.matchTrades(ordersToMatch) != null);
+		assert(matcherOrderbook.matchTrades(ordersToMatch).size() == 3);
+		System.out.println("Test Passed.");
+	}
+	
+	@Test
+	public void testTradeMatcherManyTradesWithSomeNonMatches() {
+		
+		System.out.print("Testing trade matching with many orders and some failures......");
+		
+		OrderbookImpl matcherOrderbook = new OrderbookImpl(ListGenerator.generateRandomBidList(),
+				ListGenerator.generateRandomAskList(),
+				null);
+		
+		List<Order> ordersToMatch = new ArrayList<Order>();
+		
+		double priceToMatch = 1000.5;
+		
+		OrderBuilder orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		priceToMatch = 1001.12;
+		
+		orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		priceToMatch = 1001.5;
+		
+		orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"A",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		priceToMatch = 1123.12;
+		
+		orderMaker = new OrderBuilderImpl("DEF", 
+				matcherOrderbook.getBidList().get(0).getDateTime(), 
+				priceToMatch, 
+				"50",
+				"B",
+				"6969");
+		ordersToMatch.add(orderMaker.build());
+		
+		// Check an order matched.
+		assert(matcherOrderbook.matchTrades(ordersToMatch) != null);
+		assert(matcherOrderbook.matchTrades(ordersToMatch).size() == 2);
+		System.out.println("Test Passed.");
+	}
 }
