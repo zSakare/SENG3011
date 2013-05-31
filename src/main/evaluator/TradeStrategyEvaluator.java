@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.implementations.order.AlgorithmicTrade;
+import main.implementations.order.Order;
 
 /**
  * TradeStrategyEvaluator.java
@@ -64,14 +65,15 @@ public class TradeStrategyEvaluator {
 		int tradeListSize = tradeList.size();
 		// initialize the counter
 		int i = 0;
-		
 		// while the tradeList is not empty and the counter is less than the size
 		while (tradeList != null && i < tradeListSize - 1) { 
 			// because in the way we add to the tradeList
 			AlgorithmicTrade bidTrade = tradeList.get(i);		// we know that the first one is a bid
+			printOrder(bidTrade);
 			AlgorithmicTrade askTrade = tradeList.get(i + 1);	// and the next will always be the ask
-			tradePair.put(bidTrade, askTrade);
-			i += 2;
+			printOrder(askTrade);
+			tradePair.put(bidTrade, askTrade);					// add the two values to the mapping
+			i += 2;			
 		}
 	}
 	
@@ -79,5 +81,22 @@ public class TradeStrategyEvaluator {
 		return this.tradePair;
 	}
 	
+	private void printOrder(AlgorithmicTrade newOrder) {
+		
+		List<AlgorithmicTrade> keys = new ArrayList<AlgorithmicTrade>();
+		keys.addAll(tradePair.keySet());
+		
 	
+		System.out.println("DateTime: " + newOrder.getBidOrder().getDateTime() + " Price: " + newOrder.getBidOrder().getPrice());
+		
+		
+	}
+	
+//	public ArrayList<AlgorithmicTrade> keysToArray() { 
+//		
+//		List<AlgorithmicTrade> keys = new ArrayList<AlgorithmicTrade>();
+//		keys.addAll(tradePair.keySet());
+//		
+//		AlgorithmicTrade array[keys.size()] = keys.toArray(); 
+//	}
 }
